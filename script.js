@@ -1,0 +1,111 @@
+/* Kontaktformular (öffnet das Mailprogramm) */
+(function(){
+  var f=document.getElementById('contact-form'); if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var g=function(i){return document.getElementById(i).value.trim()};
+    var body='Name: '+g('c-name')+'\nE-Mail: '+g('c-mail')+(g('c-tel')?'\nTelefon: '+g('c-tel'):'')+'\n\n'+g('c-msg');
+    location.href='mailto:Freddyhummel.webdevelopment@gmail.com?subject='+encodeURIComponent('Projektanfrage von '+g('c-name'))+'&body='+encodeURIComponent(body);
+    document.getElementById('form-msg').textContent='Danke! Ihr Mailprogramm öffnet sich.';
+  });
+})();
+
+/* Rezensionen (nur lokal im Browser; für öffentliche Bewertungen ein Backend anbinden) */
+(function(){
+  var list=document.getElementById('review-list'); if(!list) return;
+  var KEY='fh-reviews';
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
+  function render(){
+    var a=load(); list.textContent='';
+    if(!a.length){
+      var c=document.createElement('div'); c.className='card';
+      c.innerHTML='<h3>Noch keine Bewertungen</h3><p>Hier erscheinen ausschließlich echte Rückmeldungen von Kundinnen und Kunden – sobald die ersten hinterlassen wurden.</p>';
+      list.appendChild(c); return;
+    }
+    a.slice().reverse().forEach(function(r){
+      var c=document.createElement('div'); c.className='card';
+      var s=document.createElement('div'); s.className='stars'; s.textContent='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      var n=document.createElement('h3'); n.textContent=r.name;
+      var t=document.createElement('p'); t.textContent=r.text;
+      c.append(s,n,t); list.appendChild(c);
+    });
+  }
+  document.getElementById('review-form').addEventListener('submit',function(e){
+    e.preventDefault(); var a=load();
+    a.push({name:document.getElementById('r-name').value.trim(),rating:+document.getElementById('r-rating').value,text:document.getElementById('r-text').value.trim()});
+    try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
+    this.reset(); render();
+  });
+  render();
+})();
+
+/* Assistent: regelbasiert, läuft komplett im Browser (keine Datenübertragung) */
+(function(){
+  var MAIL='Freddyhummel.webdevelopment@gmail.com', TEL='+49 15562839021';
+  var KB=[
+   {k:['hallo',' hi ','guten tag','moin','servus','hey'],a:'Hallo! Ich beantworte Fragen zu dieser Website: Leistungen, Ablauf, Preise, Dauer, Kontakt und mehr. Was möchten Sie wissen?'},
+   {k:['kost','preis','teuer','budget','euro','günstig'],a:'Der Preis hängt vom Umfang ab: Seitenzahl, Funktionen und wie viel Inhalt schon vorliegt. Nach einem kurzen Gespräch erhalten Sie ein Angebot, <b>bevor</b> die Arbeit beginnt. <a href="index.html#kontakt">Projekt anfragen</a>'},
+   {k:['dauer','lange','wann fertig','zeit','schnell','wochen','tage'],a:'Meist sind es wenige Tage, je nach Umfang bis zu einer Woche. Den genauen Zeitrahmen klären wir vor dem Start.'},
+   {k:['text','bild','inhalt','material','foto'],a:'Auch ohne fertige Texte und Bilder geht das: Wir gehen die Inhalte gemeinsam durch, Freddy strukturiert sie und sagt Ihnen genau, welches Material noch fehlt.'},
+   {k:['bestehend','übernehm','alte seite','umzug','relaunch','redesign'],a:'In der Regel ja. Inhalte lassen sich übernehmen, die Adressen der Unterseiten bleiben nach Möglichkeit erhalten, damit Ihre Sichtbarkeit nicht verloren geht.'},
+   {k:['selbst ändern','selbst pflegen','cms','bearbeiten','editor','später ändern'],a:'Wenn Sie möchten, wird die Seite so eingerichtet, dass Sie Texte und Bilder selbst pflegen können. Alternativ übernimmt Freddy die Änderungen für Sie.'},
+   {k:['google','seo','gefunden','suchmaschine','ranking','platz'],a:'Freddy legt die technische Grundlage: saubere Struktur, sinnvolle Titel, schnelle Ladezeiten und lokale Angaben zu Donzdorf und Umgebung. Konkrete Platzierungen kann seriös niemand garantieren.'},
+   {k:['außerhalb','ausserhalb','digital','remote','entfernung','göppingen','region','donzdorf'],a:'Vor Ort ist Freddy im Raum Donzdorf und Kreis Göppingen unterwegs. Die Zusammenarbeit funktioniert darüber hinaus auch vollständig digital.'},
+   {k:['launch','online gehen','wartung','update','support','danach','pflege'],a:'Nach dem Launch übernimmt Freddy auf Wunsch Updates und kleine Anpassungen und ist Ansprechpartner, wenn etwas nicht funktioniert.'},
+   {k:['leistung','angebot','was machen','was bieten','landingpage','website erstellen'],a:'Freddy erstellt Webseiten für lokale Unternehmen und Selbstständige: Website-Erstellung, Redesign, Landingpages, Wartung und SEO-Grundlagen. Inhalt, Layout und Funktionen werden nach Ihrem Wunsch angepasst.'},
+   {k:['ablauf','schritte','zusammenarbeit','vorgehen','prozess'],a:'In vier Schritten: 1. Kontakt aufnehmen, 2. Beratung mit konkretem Angebot, 3. Umsetzung mit Zwischenständen, 4. gemeinsamer Check und Livegang. Danach bleibt Freddy erreichbar. <a href="index.html#ablauf">Zum Ablauf</a>'},
+   {k:['wer ','über','freddy','person','allein','team'],a:'Freddy Hummel aus Donzdorf steht allein hinter dem Angebot und gestaltet und programmiert jede Website selbst. Sie sprechen immer direkt mit ihm.'},
+   {k:['kontakt','telefon','anruf','nummer','mail','erreichen','whatsapp','adresse'],a:'Telefon: <a href="tel:+4915562839021">'+TEL+'</a><br>E-Mail: <a href="mailto:'+MAIL+'">'+MAIL+'</a><br>Standort: Donzdorf, Baden-Württemberg<br><a href="index.html#kontakt">Zum Kontaktformular</a>'},
+   {k:['bewertung','rezension','referenz','erfahrung'],a:'Kundinnen und Kunden können unter <a href="index.html#rezensionen">Rezensionen</a> eine kurze Bewertung hinterlassen.'},
+   {k:['impressum','agb','geschäftsbedingung','datenschutz','dsgvo'],a:'Rechtliches finden Sie hier: <a href="impressum.html">Impressum</a>, <a href="agb.html">AGB</a>, <a href="datenschutz.html">Datenschutzerklärung</a>.'},
+   {k:['danke','super','prima'],a:'Gern geschehen! Wenn Sie möchten, können Sie auch direkt ein Projekt anfragen.'}
+  ];
+  var FLOW=[
+   ['Aus welcher Branche kommt Ihr Unternehmen?','Branche'],
+   ['Welches Ziel soll die Website haben (z. B. Anfragen, Termine, Information)?','Ziel'],
+   ['Welche Inhalte gibt es schon (Texte, Logo, Bilder)?','Inhalte'],
+   ['Welche Funktionen brauchen Sie (z. B. Kontaktformular, Galerie, Online-Buchung)?','Funktionen']
+  ];
+  var flow=null, answers=[];
+
+  var fab=document.createElement('button'); fab.className='cb-fab'; fab.setAttribute('aria-label','Assistent öffnen');
+  fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9.5 5h5"/><circle cx="9" cy="13.5" r="1.2" fill="currentColor"/><circle cx="15" cy="13.5" r="1.2" fill="currentColor"/></svg>';
+  var box=document.createElement('div'); box.className='cb'; box.setAttribute('role','dialog'); box.setAttribute('aria-label','Assistent');
+  box.innerHTML='<div class="cb-h"><div><strong>Website-Assistent</strong><small>Automatische Antworten, kein Mensch</small></div><button aria-label="Schließen">×</button></div><div class="cb-m" aria-live="polite"></div><div class="chips"></div><form class="cb-f"><input placeholder="Ihre Frage …" aria-label="Ihre Frage" maxlength="200"><button class="btn sm" type="submit">Senden</button></form>';
+  document.body.append(box,fab);
+  var m=box.querySelector('.cb-m'), chips=box.querySelector('.chips'), inp=box.querySelector('input');
+
+  function add(t,who,html){var d=document.createElement('div'); d.className='msg '+who; if(html) d.innerHTML=t; else d.textContent=t; m.appendChild(d); m.scrollTop=m.scrollHeight;}
+  function setChips(a){chips.textContent=''; a.forEach(function(x){var b=document.createElement('button'); b.type='button'; b.textContent=x[0]; b.onclick=x[1]; chips.appendChild(b);});}
+  function home(){setChips([
+    ['Was kostet eine Website?',function(){ask('Was kostet eine Website?')}],
+    ['Wie lange dauert es?',function(){ask('Wie lange dauert die Umsetzung?')}],
+    ['Leistungen',function(){ask('Welche Leistungen gibt es?')}],
+    ['Angebot vorbereiten',startFlow],
+    ['Kontakt',function(){ask('Kontakt')}]]);}
+  function reply(q){
+    var t=' '+q.toLowerCase()+' ', best=null, bs=0;
+    KB.forEach(function(e){var s=0; e.k.forEach(function(w){if(t.indexOf(w)>-1)s++}); if(s>bs){bs=s;best=e}});
+    return best?best.a:'Dazu habe ich keine passende Antwort. Fragen Sie Freddy direkt: <a href="mailto:'+MAIL+'">'+MAIL+'</a> oder <a href="tel:+4915562839021">'+TEL+'</a>.';
+  }
+  function ask(q){
+    add(q,'me');
+    if(flow!==null){
+      if(/abbrech/i.test(q)){flow=null; add('Alles klar, abgebrochen.','bot'); home(); return;}
+      answers.push(q); flow++;
+      if(flow<FLOW.length){add(FLOW[flow][0],'bot'); return;}
+      var sum=FLOW.map(function(f,i){return f[1]+': '+answers[i]}).join('\n');
+      var href='mailto:'+MAIL+'?subject='+encodeURIComponent('Websiteanfrage')+'&body='+encodeURIComponent('Hallo Freddy,\n\nich interessiere mich für eine Website.\n\n'+sum);
+      add('Danke! Das ist die Grundlage für ein Angebot. <a href="'+href+'">Zusammenfassung per E-Mail senden</a> oder <a href="index.html#kontakt">Kontaktformular nutzen</a>.','bot',true);
+      flow=null; home(); return;
+    }
+    setTimeout(function(){add(reply(q),'bot',true)},250);
+  }
+  function open(){box.classList.add('open'); inp.focus();}
+  function startFlow(){open(); flow=0; answers=[]; add('Gern! Vier kurze Fragen, dann haben Sie eine Zusammenfassung für ein Angebot. Mit „abbrechen“ beenden Sie das jederzeit.','bot'); add(FLOW[0][0],'bot'); chips.textContent='';}
+  function toggle(){box.classList.contains('open')?box.classList.remove('open'):open();}
+  fab.onclick=toggle; box.querySelector('.cb-h button').onclick=toggle;
+  box.querySelector('form').onsubmit=function(e){e.preventDefault(); var v=inp.value.trim(); if(!v)return; inp.value=''; ask(v);};
+  document.querySelectorAll('[data-open-bot]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault(); startFlow();})});
+  add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
+})();
