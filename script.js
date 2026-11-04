@@ -1,6 +1,6 @@
 /* ===== Einstellungen ===== */
 var CFG={
-  web3formsKey:'', // Access Key von web3forms.com hier einfügen (empfohlen)
+  web3formsKey:'31495acc-b3e3-4b9d-b169-2f034629c560', // Access Key von web3forms.com hier einfügen (empfohlen)
   formEndpoint:'https://formsubmit.co/ajax/freddyhummel.de@gmail.com', // Empfänger der Anfragen
   botEndpoint:'' // URL deines KI-Proxys (siehe worker.js); leer = Bot nutzt nur die eingebauten Antworten
 };
