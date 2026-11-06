@@ -144,3 +144,42 @@ var CFG={
   document.querySelectorAll('[data-open-bot]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault(); startFlow();})});
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
 })();
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('kontakt-form');
+  const statusDiv = document.getElementById('kontakt-status');
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      statusDiv.textContent = 'Wird gesendet…';
+      statusDiv.style.color = 'inherit';
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        message: document.getElementById('message').value.trim()
+      };
+
+      try {
+        const response = await fetch('https://freddyhummel-webdevelopment.de/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.ok) {
+          statusDiv.textContent = 'Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.';
+          statusDiv.style.color = 'green';
+          form.reset();
+        } else {
+          throw new Error(result.error || 'Ein Fehler ist aufgetreten.');
+        }
+      } catch (err) {
+        statusDiv.textContent = 'Fehler: ' + err.message;
+        statusDiv.style.color = 'red';
+      }
+    });
+  }
+});
