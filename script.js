@@ -161,7 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       try {
-        const response = await fetch('https://freddyhummel-webdevelopment.de/api/contact', {
+        // Hier wird jetzt direkt an den CMS-Worker gesendet:
+        const response = await fetch('https://freddy-cms.redcraftxp.workers.dev/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
