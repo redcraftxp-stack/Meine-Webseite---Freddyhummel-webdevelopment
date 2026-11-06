@@ -15,7 +15,7 @@
 <link href="favicon-48x48.png" rel="icon" sizes="48x48" type="image/png"/>
 <link href="favicon-192.png" rel="icon" sizes="192x192" type="image/png"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="style.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/><link href="/api/design.css" rel="stylesheet"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Freddy Hummel – Web Development","url":"https://DEINE-DOMAIN.de/","logo":"https://DEINE-DOMAIN.de/favicon-512.png"}
 </script>
@@ -77,7 +77,7 @@
 <div class="wrap reviews">
 <div>
 <h2 data-cms="rezensionen.h2.0">Rezensionen</h2>
-<p class="muted" data-cms="rezensionen.p.0">Sie haben mit mir zusammengearbeitet? Hinterlassen Sie eine kurze Bewertung – sie erscheint direkt hier auf der Seite.</p>
+<p class="muted" data-cms="rezensionen.p.0">Sie haben mit mir zusammengearbeitet? Hinterlassen Sie eine kurze Bewertung – ich prüfe sie kurz und veröffentliche sie dann hier.</p>
 <form class="card rform" id="review-form">
 <div class="field"><label for="r-name">Ihr Name</label><input id="r-name" maxlength="60" placeholder="Vor- und Nachname" required=""/></div>
 <div class="field"><label for="r-rating">Bewertung</label>
@@ -117,9 +117,9 @@
 <h2 data-cms="kontakt.h2.0" style="max-width:7em">Sprechen wir über Ihr Projekt</h2>
 <p class="lead" data-cms="kontakt.p.0">Erzählen Sie mir kurz, was Sie brauchen. Ich melde mich zeitnah zurück – die Erstberatung ist unverbindlich.</p>
 <div class="cl">
-<div><small data-cms="kontakt.small.0">Telefon</small><a data-cms="kontakt.a.0" href="tel:+4915562839021">+49 15562839021</a></div>
-<div><small data-cms="kontakt.small.1">E-Mail</small><a data-cms="kontakt.a.1" href="mailto:Freddyhummel.webdevelopment@gmail.com">Freddyhummel.webdevelopment@gmail.com</a></div>
-<div><small data-cms="kontakt.small.2">Standort</small><span>Donzdorf, Baden-Württemberg</span></div>
+<div><small data-cms="kontakt.small.0">Telefon</small><a data-site="phone" href="tel:+4915562839021">+49 15562839021</a></div>
+<div><small data-cms="kontakt.small.1">E-Mail</small><a data-site="email" href="mailto:Freddyhummel.webdevelopment@gmail.com">Freddyhummel.webdevelopment@gmail.com</a></div>
+<div><small data-cms="kontakt.small.2">Standort</small><span data-site="city">Donzdorf, Baden-Württemberg</span></div>
 </div>
 </div>
 <form class="cform" id="contact-form">
@@ -141,7 +141,7 @@
 <div class="foot">
 <div><a class="logo" href="index.html">Freddy Hummel<i>.</i></a><p data-cms="footer.p.0">Webentwicklung in Donzdorf – klare und schnelle Webseiten für lokale Unternehmen und Selbstständige.</p></div>
 <ul><li><a data-cms="footer.a.0" href="#leistungen">Leistungen</a></li><li><a data-cms="footer.a.1" href="#ablauf">Ablauf</a></li><li><a data-cms="footer.a.2" href="#rezensionen">Rezensionen</a></li><li><a data-cms="footer.a.3" href="#faq">FAQ</a></li><li><a data-cms="footer.a.4" href="#kontakt">Kontakt</a></li></ul>
-<div><small data-cms="footer.small.0">Kontakt</small><p>+49 15562839021<br/>Freddyhummel.webdevelopment@gmail.com</p></div>
+<div><small data-cms="footer.small.0">Kontakt</small><p><span data-site="phone">+49 15562839021</span><br/><span data-site="email">Freddyhummel.webdevelopment@gmail.com</span></p><div hidden="" id="social"></div></div>
 </div>
 <div class="legal"><span>© 2026 Freddy Hummel – Web Development</span><span><a data-cms="footer.a.5" href="impressum.html">Impressum</a><a data-cms="footer.a.6" href="agb.html">AGB</a><a data-cms="footer.a.7" href="datenschutz.html">Datenschutzerklärung</a></span></div>
 </div>

@@ -13,11 +13,11 @@ h3{font-size:1.05rem;font-weight:500}
 p{margin:0 0 1em}
 .muted{color:var(--muted)}
 .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-section{padding:96px 0}
+section{padding:var(--space,96px) 0}
 .alt{background:var(--alt)}
 :focus-visible{outline:3px solid var(--teal);outline-offset:3px}
 .eyebrow{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:1.4em}
-.btn{white-space:nowrap;display:inline-block;padding:.85em 1.5em;border-radius:6px;background:var(--navy);color:#fff;text-decoration:none;font:600 1rem var(--sans);border:1px solid var(--navy);cursor:pointer}
+.btn{white-space:nowrap;display:inline-block;padding:.85em 1.5em;border-radius:var(--btn-radius,6px);background:var(--navy);color:#fff;text-decoration:none;font:600 1rem var(--sans);border:1px solid var(--navy);cursor:pointer}
 .btn:hover{filter:brightness(1.15)}
 .btn.ghost{background:#fff;color:var(--ink);border-color:var(--line);font-weight:500}
 .btn.teal{background:var(--teal);border-color:var(--teal)}
@@ -39,7 +39,7 @@ nav a:hover{color:var(--ink)}
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
 .hero p.lead{font-size:1.25rem;color:var(--muted);max-width:30em;margin:1.4em 0}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px}
-.hero img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:40% center;border-radius:8px;background:linear-gradient(160deg,#1a3f5c,#0f2233)}
+.hero img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:40% center;border-radius:var(--radius,8px);background:linear-gradient(160deg,#1a3f5c,#0f2233)}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero{padding:56px 0}}
 
 .about{display:grid;grid-template-columns:1fr 1.5fr;gap:64px}
@@ -58,7 +58,7 @@ nav a:hover{color:var(--ink)}
 @media(max-width:540px){.steps{grid-template-columns:1fr}}
 
 .reviews{display:grid;grid-template-columns:1fr 1.45fr;gap:56px;align-items:start}
-.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:28px 30px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius,10px);padding:28px 30px}
 .card h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin-bottom:.5em}
 .card p{color:var(--muted);font-size:.98rem;margin:0}
 .rform{margin-top:32px}
@@ -87,7 +87,7 @@ details p{color:var(--muted);margin:0 0 24px;max-width:60ch}
 .cl{margin-top:36px;display:grid;gap:18px}
 .cl small{display:block;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#a9bccb}
 .cl a,.cl span{font-weight:500;text-decoration:none;word-break:break-word}
-.cform{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:40px}
+.cform{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius,10px);padding:40px}
 .cform .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .cform input,.cform textarea{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.22);color:#fff}
 .cform ::placeholder{color:#8fa6b8}
@@ -150,3 +150,5 @@ footer{background:var(--foot);color:#c5d0d9;padding:56px 0 32px}
 .doc{overflow-wrap:anywhere}
 .reviews>*,.about>*,.faq-grid>*,.contact-grid>*,.hero-grid>*{min-width:0}
 select,input,textarea{max-width:100%}
+
+#social ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
