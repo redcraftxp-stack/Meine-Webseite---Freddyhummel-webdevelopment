@@ -136,6 +136,32 @@
 </div>
 </section>
 </main>
+  <section id="kontakt" class="section" style="padding: 60px 0; background: var(--alt, #f7f9fa);">
+  <div class="wrap" style="max-width: 700px; margin: 0 auto; padding: 0 20px;">
+    <h2>Projekt anfragen</h2>
+    <p class="sub" style="margin-bottom: 30px;">Haben Sie ein Projekt im Kopf? Schreiben Sie mir direkt eine Nachricht.</p>
+    
+    <form id="kontakt-form">
+      <div style="margin-bottom: 20px;">
+        <label for="name" style="display:block; margin-bottom:8px; font-weight:600;">Ihr Name</label>
+        <input type="text" id="name" name="name" required style="width:100%; padding:12px; border:1px solid var(--line, #ccc); border-radius:var(--radius, 8px); font-size:15px;">
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <label for="email" style="display:block; margin-bottom:8px; font-weight:600;">Ihre E-Mail-Adresse</label>
+        <input type="email" id="email" name="email" required style="width:100%; padding:12px; border:1px solid var(--line, #ccc); border-radius:var(--radius, 8px); font-size:15px;">
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <label for="message" style="display:block; margin-bottom:8px; font-weight:600;">Ihre Nachricht</label>
+        <textarea id="message" name="message" rows="5" required style="width:100%; padding:12px; border:1px solid var(--line, #ccc); border-radius:var(--radius, 8px); font-size:15px;"></textarea>
+      </div>
+      
+      <button type="submit" class="btn" style="cursor:pointer; padding: 12px 24px;">Nachricht senden</button>
+      <div id="kontakt-status" style="margin-top: 15px; font-weight: 500;"></div>
+    </form>
+  </div>
+</section>
 <footer>
 <div class="wrap">
 <div class="foot">
