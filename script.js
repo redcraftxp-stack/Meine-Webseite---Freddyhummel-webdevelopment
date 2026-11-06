@@ -144,3 +144,27 @@ var CFG={
   document.querySelectorAll('[data-open-bot]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault(); startFlow();})});
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
 })();
+document.addEventListener('DOMContentLoaded', function() {
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function() {
+      // Daten aus den Feldern Ihres echten Formulars auslesen
+      const data = {
+        name: document.getElementById('c-name')?.value?.trim() || '',
+        email: document.getElementById('c-mail')?.value?.trim() || '',
+        phone: document.getElementById('c-tel')?.value?.trim() || '',
+        message: document.getElementById('c-msg')?.value?.trim() || ''
+      };
+
+      // Nachricht parallel an das CMS senden (im Hintergrund)
+      fetch('https://freddy-cms.redcraftxp.workers.dev/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(function(err) {
+        console.error('CMS Sync Fehler:', err);
+      });
+    });
+  }
+});
