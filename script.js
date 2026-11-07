@@ -639,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var formattedDate = formatReviewDate(r.date);
 
         if (formattedDate) {
-          date.textContent = formattedDate;
+         date.textContent = '  ' + formattedDate;
         }
 
         var stars = document.createElement('div');
