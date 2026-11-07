@@ -152,3 +152,48 @@ footer{background:var(--foot);color:#c5d0d9;padding:56px 0 32px}
 select,input,textarea{max-width:100%}
 
 #social ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+
+/* ===== Chatbot: Größer und responsive ===== */
+
+.cb {
+  height: min(680px, calc(100dvh - 110px));
+  max-height: calc(100dvh - 110px);
+  width: min(390px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+}
+
+.cb-m {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Einklappbare häufige Fragen */
+.cb-chips-toggle {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 8px 12px;
+  padding: 10px;
+  border: 1px solid #dce4ee;
+  border-radius: 12px;
+  background: #f5f8fc;
+  color: #24558a;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chips[hidden] {
+  display: none !important;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+  .cb {
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 90px);
+    height: min(680px, calc(100dvh - 90px));
+  }
+}
