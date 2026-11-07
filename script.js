@@ -116,29 +116,96 @@ var CFG={
   document.querySelectorAll('[data-open-bot]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault(); startFlow();})});
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
 })();
-document.addEventListener('DOMContentLoaded', function() {
-  const contactForm = document.getElementById('contact-form');
+document.addEventListener('DOMContentLoaded', function () {
+  const reviewForm = document.getElementById('review-form');
+  const reviewList = document.getElementById('review-list');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', function() {
-      // Daten aus den Feldern Ihres echten Formulars auslesen
-      const data = {
-        name: document.getElementById('c-name')?.value?.trim() || '',
-        email: document.getElementById('c-mail')?.value?.trim() || '',
-        phone: document.getElementById('c-tel')?.value?.trim() || '',
-        message: document.getElementById('c-msg')?.value?.trim() || ''
-      };
+  if (!reviewForm) return;
 
-      // Nachricht parallel an das CMS senden (im Hintergrund)
-      fetch('https://freddy-cms.redcraftxp.workers.dev/api/contact', {
+  async function loadReviews() {
+    if (!reviewList) return;
+
+    try {
+      const res = await fetch('/api/reviews');
+      if (!res.ok) throw new Error('Laden fehlgeschlagen');
+
+      const data = await res.json();
+      const reviews = Array.isArray(data) ? data : (data.reviews || []);
+
+      reviewList.replaceChildren();
+
+      if (reviews.length === 0) {
+        reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
+        return;
+      }
+
+      reviews.forEach(function (r) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const name = document.createElement('strong');
+        name.textContent = r.name;
+
+        const stars = document.createElement('div');
+        stars.className = 'stars';
+        stars.textContent =
+          '★'.repeat(r.rating || 5) +
+          '☆'.repeat(5 - (r.rating || 5));
+
+        const text = document.createElement('p');
+        text.textContent = r.text;
+
+        card.append(name, stars, text);
+        reviewList.appendChild(card);
+      });
+    } catch (err) {
+      console.error('Rezensionen laden:', err);
+    }
+  }
+
+  reviewForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const name = reviewForm.querySelector('#r-name').value.trim();
+    const rating = Number(reviewForm.querySelector('#r-rating').value);
+    const text = reviewForm.querySelector('#r-text').value.trim();
+
+    console.log('REZENSION VOR DEM SENDEN:', {
+      name: name,
+      rating: rating,
+      text: text
+    });
+
+    const button = reviewForm.querySelector('button[type="submit"]');
+    button.disabled = true;
+
+    try {
+      const res = await fetch('/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).catch(function(err) {
-        console.error('CMS Sync Fehler:', err);
+        body: JSON.stringify({ name, rating, text })
       });
-    });
-  }
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || 'Fehler beim Absenden');
+      }
+
+      reviewForm.reset();
+      alert('Vielen Dank! Deine Bewertung wurde eingereicht und wird geprüft.');
+      await loadReviews();
+
+    } catch (err) {
+      console.error('REZENSIONSFEHLER:', err);
+      alert(err.message || 'Fehler beim Absenden.');
+    } finally {
+      button.disabled = false;
+    }
+  }, true);
+
+  loadReviews();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
