@@ -136,18 +136,18 @@ var CFG={
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
 })();
 document.addEventListener('DOMContentLoaded', function () {
-  document.addEventListener('DOMContentLoaded', function () {
   const reviewForm = document.getElementById('review-form');
   const reviewList = document.getElementById('review-list');
-
-  if (!reviewForm) return;
 
   async function loadReviews() {
     if (!reviewList) return;
 
     try {
       const res = await fetch('/api/reviews', { cache: 'no-store' });
-      if (!res.ok) throw new Error('Rezensionen konnten nicht geladen werden');
+
+      if (!res.ok) {
+        throw new Error('Rezensionen konnten nicht geladen werden');
+      }
 
       const data = await res.json();
       const reviews = Array.isArray(data.reviews) ? data.reviews : [];
@@ -185,44 +185,46 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  reviewForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-    const btn = reviewForm.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Wird gesendet …';
+      const btn = reviewForm.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet …';
 
-    try {
-      const payload = {
-        name: document.getElementById('r-name').value.trim(),
-        rating: Number(document.getElementById('r-rating').value),
-        text: document.getElementById('r-text').value.trim()
-      };
+      try {
+        const payload = {
+          name: document.getElementById('r-name').value.trim(),
+          rating: Number(document.getElementById('r-rating').value),
+          text: document.getElementById('r-text').value.trim()
+        };
 
-      const res = await fetch('/api/reviews', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+        const res = await fetch('/api/reviews', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Fehler beim Senden');
+        if (!res.ok) {
+          throw new Error(data.error || 'Fehler beim Senden');
+        }
+
+        reviewForm.reset();
+
+        alert('Vielen Dank! Deine Bewertung wurde gesendet und wird nach Prüfung veröffentlicht.');
+
+      } catch (err) {
+        console.error('Bewertung senden:', err);
+        alert(err.message || 'Die Bewertung konnte nicht gesendet werden.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Bewertung absenden';
       }
-
-      reviewForm.reset();
-      alert('Vielen Dank! Deine Bewertung wurde gesendet und wird nach Prüfung veröffentlicht.');
-
-    } catch (err) {
-      console.error('Bewertung senden:', err);
-      alert(err.message || 'Die Bewertung konnte nicht gesendet werden.');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Bewertung absenden';
-    }
-  });
+    });
+  }
 
   loadReviews();
 });
-
