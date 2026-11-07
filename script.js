@@ -6,32 +6,51 @@ var CFG={
 };
 
 /* Kontaktformular: sendet eine Mail an freddyhummel.de@gmail.com, Betreff "Anfrage Webseite" */
-(function(){
-  var f=document.getElementById('contact-form'); if(!f) return;
-  var msg=document.getElementById('form-msg'), btn=f.querySelector('button[type=submit]');
-  f.addEventListener('submit',function(e){
+/* Kontaktformular: speichert Anfragen im CMS */
+(function () {
+  var f = document.getElementById('contact-form');
+  if (!f) return;
+
+  var msg = document.getElementById('form-msg');
+  var btn = f.querySelector('button[type="submit"]');
+
+  f.addEventListener('submit', async function (e) {
     e.preventDefault();
-    if(f.querySelector('[name=_honey]').value) return; // Spam-Falle
-    var g=function(i){return document.getElementById(i).value.trim()};
-    var data={
-      _subject:'Anfrage Webseite', _template:'table', _captcha:'false',
-      Name:g('c-name'), email:g('c-mail'), Telefon:g('c-tel')||'–', Nachricht:g('c-msg')
-    };
-    btn.disabled=true; msg.textContent='Wird gesendet …';
-    var w3=CFG.web3formsKey;
-    var url=w3?'https://api.web3forms.com/submit':CFG.formEndpoint;
-    var payload=w3?{access_key:w3,subject:'Anfrage Webseite',from_name:'Webseite Freddy Hummel',name:data.Name,email:data.email,telefon:data.Telefon,nachricht:data.Nachricht}:data;
-    fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
-      .then(function(r){return r.json()})
-      .then(function(j){
-        if(j.success===true||j.success==='true'){ msg.textContent='Danke! Ihre Nachricht wurde gesendet. Ich melde mich zeitnah.'; f.reset(); }
-        else throw new Error(j.message||'Fehler');
-      })
-      .catch(function(){
-        var body='Name: '+data.Name+'\nE-Mail: '+data.email+'\nTelefon: '+data.Telefon+'\n\n'+data.Nachricht;
-        msg.innerHTML='Senden hat nicht geklappt. <a style="color:#fff" href="mailto:freddyhummel.de@gmail.com?subject='+encodeURIComponent('Anfrage Webseite')+'&body='+encodeURIComponent(body)+'">Stattdessen per E-Mail-Programm senden</a>.';
-      })
-      .then(function(){btn.disabled=false});
+
+    if (f.querySelector('[name="_honey"]').value) return;
+
+    btn.disabled = true;
+    msg.textContent = 'Wird gesendet …';
+
+    try {
+      const payload = {
+        name: document.getElementById('c-name').value.trim(),
+        email: document.getElementById('c-mail').value.trim(),
+        phone: document.getElementById('c-tel').value.trim(),
+        message: document.getElementById('c-msg').value.trim()
+      };
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Fehler beim Senden');
+      }
+
+      msg.textContent = 'Vielen Dank! Ihre Nachricht wurde gesendet.';
+      f.reset();
+
+    } catch (err) {
+      console.error('Kontaktformular:', err);
+      msg.textContent = err.message || 'Nachricht konnte nicht gesendet werden.';
+    } finally {
+      btn.disabled = false;
+    }
   });
 })();
 
