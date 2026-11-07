@@ -42,10 +42,15 @@
 
 <body>
 <header>
+ <header>
   <div class="wrap bar">
+
     <a class="logo" href="/es/" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
-      <img alt="Freddy Hummel Web Development" height="34" src="/logo.png" width="73" style="object-fit:contain; display:block;"/>
-      <span>Freddy Hummel <small>Web Development</small></span>
+      <img src="/logo.png" alt="Freddy Hummel Web Development" width="73" height="34" style="object-fit:contain; display:block;">
+      <span>
+        Freddy Hummel
+        <small>Web Development</small>
+      </span>
     </a>
 
     <nav aria-label="Navegación principal">
@@ -54,12 +59,31 @@
         <li><a href="#ueber">Sobre mí</a></li>
         <li><a href="#ablauf">Proceso</a></li>
         <li><a href="#rezensionen">Opiniones</a></li>
-        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
 
-    <a class="btn sm" href="#kontakt"><span class="d">Iniciar un </span>proyecto</a>
+    <div class="language-selector">
+      <details>
+        <summary aria-label="Seleccionar idioma">
+          <span>🌐</span>
+          <span>Idioma</span>
+          <span class="language-arrow">⌄</span>
+        </summary>
+
+        <div class="language-menu">
+          <a href="/de/" lang="de">🇩🇪 Deutsch</a>
+          <a href="/en/" lang="en">🇬🇧 English</a>
+          <a href="/es/" lang="es">🇪🇸 Español</a>
+          <a href="/fr/" lang="fr">🇫🇷 Français</a>
+        </div>
+      </details>
+    </div>
+
+    <a class="btn sm" href="#kontakt">Solicitar proyecto</a>
+
   </div>
+</header>
 </header>
 
 <main>
