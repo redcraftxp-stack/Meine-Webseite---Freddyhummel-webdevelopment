@@ -18,27 +18,149 @@
   <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
   <link href="style.css" rel="stylesheet"/>
   <link href="/api/design.css" rel="stylesheet"/>
+
+  <style>
+    /* Sprachauswahl */
+    .language-selector {
+      position: relative;
+      z-index: 1000;
+      flex-shrink: 0;
+    }
+
+    .language-selector details {
+      position: relative;
+    }
+
+    .language-selector summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .language-selector summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .language-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .language-selector details[open] .language-arrow {
+      transform: rotate(180deg);
+    }
+
+    .language-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 160px;
+      padding: 6px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.12);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .language-menu a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .language-menu a:hover {
+      background: var(--alt);
+    }
+
+    @media (max-width: 600px) {
+      .language-selector summary {
+        padding: 8px;
+        font-size: 12px;
+      }
+
+      .language-menu {
+        right: 0;
+        min-width: 150px;
+      }
+    }
+  </style>
+
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Freddy Hummel – Web Development","url":"https://DEINE-DOMAIN.de/","logo":"https://DEINE-DOMAIN.de/favicon-512.png"}
   </script>
 </head>
+
 <body>
+
 <header>
   <div class="wrap bar">
-    <a class="logo" href="index.html" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
-      <img alt="Freddy Hummel Web Development" height="34" src="logo.png" width="73" style="object-fit:contain; display:block;"/>
-      <span>Freddy Hummel <small data-cms="header.small.0">Web Development</small></span>
+
+    <!-- Logo -->
+    <a class="logo" href="/de/" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+      <img
+        alt="Freddy Hummel Web Development"
+        height="34"
+        src="/logo.png"
+        width="73"
+        style="object-fit:contain; display:block;"
+      />
+      <span>
+        Freddy Hummel
+        <small data-cms="header.small.0">Web Development</small>
+      </span>
     </a>
-    <nav aria-label="Hauptnavigation"><ul>
-      <li><a data-cms="header.a.0" href="#leistungen">Leistungen</a></li>
-      <li><a data-cms="header.a.1" href="#ueber">Über mich</a></li>
-      <li><a data-cms="header.a.2" href="#ablauf">Ablauf</a></li>
-      <li><a data-cms="header.a.3" href="#rezensionen">Rezensionen</a></li>
-      <li><a data-cms="header.a.4" href="#faq">FAQ</a></li>
-    </ul></nav>
-    <a class="btn sm" href="#kontakt"><span class="d">Projekt </span>Anfragen</a>
+
+    <!-- Hauptnavigation -->
+    <nav aria-label="Hauptnavigation">
+      <ul>
+        <li><a data-cms="header.a.0" href="#leistungen">Leistungen</a></li>
+        <li><a data-cms="header.a.1" href="#ueber">Über mich</a></li>
+        <li><a data-cms="header.a.2" href="#ablauf">Ablauf</a></li>
+        <li><a data-cms="header.a.3" href="#rezensionen">Rezensionen</a></li>
+        <li><a data-cms="header.a.4" href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Sprachauswahl -->
+    <div class="language-selector">
+      <details>
+        <summary aria-label="Sprache auswählen">
+          <span>🌐</span>
+          <span>Sprache</span>
+          <span class="language-arrow">⌄</span>
+        </summary>
+
+        <div class="language-menu">
+          <a href="/de/" lang="de">🇩🇪 Deutsch</a>
+          <a href="/en/" lang="en">🇬🇧 English</a>
+          <a href="/es/" lang="es">🇪🇸 Español</a>
+          <a href="/fr/" lang="fr">🇫🇷 Français</a>
+        </div>
+      </details>
+    </div>
+
+    <!-- Kontaktbutton -->
+    <a class="btn sm" href="#kontakt">
+      <span class="d">Projekt </span>Anfragen
+    </a>
+
   </div>
 </header>
+
 <main>
   <section class="hero">
     <div class="wrap hero-grid">
@@ -46,7 +168,10 @@
         <p class="eyebrow" data-cms="hero.p.0">Webentwicklung</p>
         <h1 data-cms="hero.h1.0">Websites für Unternehmen aus der Region</h1>
         <p class="lead" data-cms="hero.p.1">Ich bin Freddy Hummel und erstelle Webseite für lokale und selbstständige Unternehmen.</p>
-        <div class="hero-actions"><a class="btn" data-cms="hero.a.0" href="#kontakt">Unverbindlich anfragen</a><a class="btn ghost" data-cms="hero.a.1" href="#leistungen">Leistungen ansehen</a></div>
+        <div class="hero-actions">
+          <a class="btn" data-cms="hero.a.0" href="#kontakt">Unverbindlich anfragen</a>
+          <a class="btn ghost" data-cms="hero.a.1" href="#leistungen">Leistungen ansehen</a>
+        </div>
       </div>
       <img alt="Laptop auf hellem Holzschreibtisch mit Kaffeetasse und Stiften am Fenster" data-cms-src="hero.image" height="800" src="hero-arbeitsplatz.jpg" width="640"/>
     </div>
@@ -65,10 +190,22 @@
       <div>
         <p class="muted" data-cms="ueber.p.0">Hinter Freddy Hummel – Web Development stehe ich allein: Freddy Hummel aus Donzdorf. Ich gestalte und programmiere jede Website selbst.</p>
         <div class="facts">
-          <div><h3 data-cms="ueber.h3.0">Direkter Ansprechpartner</h3><p data-cms="ueber.p.1">Sie sprechen mit der Person, die Ihre Website auch baut.</p></div>
-          <div><h3 data-cms="ueber.h3.1">Aus der Region</h3><p data-cms="ueber.p.2">Ich bin in Donzdorf ansässig und vor Ort in der Umgebung erreichbar.</p></div>
-          <div><h3 data-cms="ueber.h3.2">Schlanke Umsetzung</h3><p data-cms="ueber.p.3">Ich achte auf kurze Ladezeiten und eine saubere technische Struktur.</p></div>
-          <div><h3 data-cms="ueber.h3.3">Klare Absprachen</h3><p data-cms="ueber.p.4">Umfang, Zeitrahmen und Kosten klären wir vor der Umsetzung.</p></div>
+          <div>
+            <h3 data-cms="ueber.h3.0">Direkter Ansprechpartner</h3>
+            <p data-cms="ueber.p.1">Sie sprechen mit der Person, die Ihre Website auch baut.</p>
+          </div>
+          <div>
+            <h3 data-cms="ueber.h3.1">Aus der Region</h3>
+            <p data-cms="ueber.p.2">Ich bin in Donzdorf ansässig und vor Ort in der Umgebung erreichbar.</p>
+          </div>
+          <div>
+            <h3 data-cms="ueber.h3.2">Schlanke Umsetzung</h3>
+            <p data-cms="ueber.p.3">Ich achte auf kurze Ladezeiten und eine saubere technische Struktur.</p>
+          </div>
+          <div>
+            <h3 data-cms="ueber.h3.3">Klare Absprachen</h3>
+            <p data-cms="ueber.p.4">Umfang, Zeitrahmen und Kosten klären wir vor der Umsetzung.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -79,11 +216,16 @@
       <div>
         <h2 data-cms="rezensionen.h2.0">Rezensionen</h2>
         <p class="muted" data-cms="rezensionen.p.0">Sie haben mit mir zusammengearbeitet? Hinterlassen ich eine kurze Bewertung – ich prüfe sie kurz und veröffentliche sie dann hier.</p>
-        
+
         <!-- Formular im originalen Design -->
         <form class="card rform" id="review-form">
-          <div class="field"><label for="r-name">Ihr Name</label><input id="r-name" maxlength="60" placeholder="Vor- und Nachname" required=""/></div>
-          <div class="field"><label for="r-rating">Bewertung</label>
+          <div class="field">
+            <label for="r-name">Ihr Name</label>
+            <input id="r-name" maxlength="60" placeholder="Vor- und Nachname" required=""/>
+          </div>
+
+          <div class="field">
+            <label for="r-rating">Bewertung</label>
             <select id="r-rating">
               <option value="5">★★★★★ – Sehr gut</option>
               <option value="4">★★★★☆ – Gut</option>
@@ -92,10 +234,16 @@
               <option value="1">★☆☆☆☆ – Schlecht</option>
             </select>
           </div>
-          <div class="field"><label for="r-text">Ihre Bewertung</label><textarea id="r-text" maxlength="500" placeholder="Wie war die Zusammenarbeit?" required="" rows="4"></textarea></div>
+
+          <div class="field">
+            <label for="r-text">Ihre Bewertung</label>
+            <textarea id="r-text" maxlength="500" placeholder="Wie war die Zusammenarbeit?" required="" rows="4"></textarea>
+          </div>
+
           <button class="btn" data-cms="rezensionen.button.0" type="submit">Bewertung absenden</button>
         </form>
       </div>
+
       <div aria-live="polite" id="review-list"></div>
     </div>
   </section>
