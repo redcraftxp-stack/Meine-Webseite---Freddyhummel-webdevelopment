@@ -708,4 +708,25 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   loadReviews();
+  loadReviews();
+
+  /* ===== Besucherstatistik ===== */
+  (function () {
+    if (
+      location.pathname.startsWith('/admin') ||
+      location.pathname.startsWith('/api/')
+    ) return;
+
+    fetch('/api/analytics/track', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        path: location.pathname
+      }),
+      keepalive: true
+    }).catch(function () {});
+  })();
+
 });
