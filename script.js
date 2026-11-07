@@ -117,7 +117,7 @@ var CFG={
   },
   {
     k:['kontakt','telefon','anruf','nummer','mail','erreichen','adresse'],
-    a:'Sie erreichen Freddy per E-Mail unter <a href="mailto:freddyhummel.webdevelopment@gmail.com">freddyhummel.webdevelopment@gmail.com</a> oder telefonisch unter <a href="tel:+4915562839021">+49 155 62839021</a>. <a href="index.html#kontakt">Zum Kontaktformular</a>.'
+    a:'Sie erreichen Freddy per E-Mail unter:<br><a href="mailto:freddyhummel.webdevelopment@gmail.com">freddyhummel.webdevelopment@gmail.com</a><br><br>Oder telefonisch unter:<br><a href="tel:+4915562839021">+49 155 62839021</a><br><br><a href="/#kontakt">Zum Kontaktformular</a>'
   },
   {
     k:['bewertung','rezension','referenz','erfahrung'],
