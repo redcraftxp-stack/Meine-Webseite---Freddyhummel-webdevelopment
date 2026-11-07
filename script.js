@@ -2,7 +2,7 @@
 var CFG={
   web3formsKey:'31495acc-b3e3-4b9d-b169-2f034629c560', // Access Key von web3forms.com hier einfügen (empfohlen)
   formEndpoint:'https://formsubmit.co/ajax/freddyhummel.de@gmail.com', // Empfänger der Anfragen
-  botEndpoint:'' // URL deines KI-Proxys (siehe worker.js); leer = Bot nutzt nur die eingebauten Antworten
+  botEndpoint:'/api/chat' // URL deines KI-Proxys (siehe worker.js); leer = Bot nutzt nur die eingebauten Antworten
 };
 
 /* Kontaktformular: sendet eine Mail an freddyhummel.de@gmail.com, Betreff "Anfrage Webseite" */
@@ -92,7 +92,7 @@ var CFG={
     var d=document.createElement('div'); d.className='msg bot'; d.style.whiteSpace='pre-wrap'; d.textContent='…'; m.appendChild(d); m.scrollTop=m.scrollHeight;
     fetch(CFG.botEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist.slice(-8)})})
       .then(function(r){if(!r.ok)throw 0;return r.json()})
-      .then(function(j){var t=(j.reply||'').trim(); if(!t)throw 0; hist.push({role:'assistant',content:t}); d.textContent=t; m.scrollTop=m.scrollHeight;})
+      .then(function(j){var t=(typeof j.reply==='string'?j.reply:'').trim(); if(!t)throw 0; hist.push({role:'assistant',content:t}); d.textContent=t; m.scrollTop=m.scrollHeight;})
       .catch(function(){hist.pop(); d.style.whiteSpace=''; d.innerHTML=reply(q);});
   }
   function ask(q){
@@ -117,77 +117,93 @@ var CFG={
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
 })();
 document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
   const reviewForm = document.getElementById('review-form');
   const reviewList = document.getElementById('review-list');
 
   if (!reviewForm) return;
 
+  async function loadReviews() {
+    if (!reviewList) return;
 
-async function loadReviews() {
-  if (!reviewList) return;
+    try {
+      const res = await fetch('/api/reviews', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Rezensionen konnten nicht geladen werden');
 
-  try {
-    const res = await fetch('/api/reviews');
-    if (!res.ok) throw new Error('Laden fehlgeschlagen');
+      const data = await res.json();
+      const reviews = Array.isArray(data.reviews) ? data.reviews : [];
 
-    const data = await res.json();
-    const reviews = Array.isArray(data) ? data : (data.reviews || []);
-
-    reviewList.replaceChildren();
-
-    if (reviews.length === 0) {
-      reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
-      return;
-    }
-
-    let expanded = false;
-
-    function renderReviews() {
       reviewList.replaceChildren();
 
-      const visibleReviews = expanded ? reviews : reviews.slice(0, 4);
+      if (!reviews.length) {
+        reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
+        return;
+      }
 
-      visibleReviews.forEach(function (r) {
+      reviews.forEach(function (r) {
         const card = document.createElement('div');
         card.className = 'card';
 
         const name = document.createElement('strong');
-        name.textContent = r.name;
+        name.textContent = r.name || 'Kunde';
 
         const stars = document.createElement('div');
         stars.className = 'stars';
-        stars.textContent =
-          '★'.repeat(r.rating || 5) +
-          '☆'.repeat(5 - (r.rating || 5));
+
+        const rating = Math.max(1, Math.min(5, Number(r.rating) || 5));
+        stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
 
         const text = document.createElement('p');
-        text.textContent = r.text;
+        text.textContent = r.text || '';
 
         card.append(name, stars, text);
         reviewList.appendChild(card);
       });
 
-      if (reviews.length > 4) {
-        const toggle = document.createElement('button');
-        toggle.type = 'button';
-        toggle.className = 'btn';
-        toggle.textContent = expanded
-          ? 'Weniger anzeigen'
-          : `Weitere ${reviews.length - 4} Bewertungen anzeigen`;
-
-        toggle.addEventListener('click', function () {
-          expanded = !expanded;
-          renderReviews();
-        });
-
-        reviewList.appendChild(toggle);
-      }
+    } catch (err) {
+      console.error('Rezensionen laden:', err);
+      reviewList.textContent = 'Rezensionen konnten gerade nicht geladen werden.';
     }
-
-    renderReviews();
-
-  } catch (err) {
-    console.error('Rezensionen laden:', err);
   }
-}
+
+  reviewForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const btn = reviewForm.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet …';
+
+    try {
+      const payload = {
+        name: document.getElementById('r-name').value.trim(),
+        rating: Number(document.getElementById('r-rating').value),
+        text: document.getElementById('r-text').value.trim()
+      };
+
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Fehler beim Senden');
+      }
+
+      reviewForm.reset();
+      alert('Vielen Dank! Deine Bewertung wurde gesendet und wird nach Prüfung veröffentlicht.');
+
+    } catch (err) {
+      console.error('Bewertung senden:', err);
+      alert(err.message || 'Die Bewertung konnte nicht gesendet werden.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Bewertung absenden';
+    }
+  });
+
+  loadReviews();
+});
 
