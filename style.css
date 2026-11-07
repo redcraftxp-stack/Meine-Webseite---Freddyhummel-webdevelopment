@@ -155,14 +155,19 @@ select,input,textarea{max-width:100%}
 
 /* ===== Chatbot: Größer und responsive ===== */
 
+/* ===== Chatbot: Größer und responsive ===== */
+
 .cb {
   height: min(680px, calc(100dvh - 110px));
   max-height: calc(100dvh - 110px);
   width: min(390px, calc(100vw - 24px));
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 
+.cb.open {
+  display: flex;
+}
 .cb-m {
   flex: 1;
   min-height: 0;
