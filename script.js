@@ -227,10 +227,36 @@ if(fixedAnswer){
   setTimeout(function(){add(reply(q),'bot',true)},250);
 }
   }
-  function open(){box.classList.add('open'); inp.focus();}
-  function startFlow(){open(); flow=0; answers=[]; add('Gern! Vier kurze Fragen, dann haben Sie eine Zusammenfassung für ein Angebot. Mit „abbrechen“ beenden Sie das jederzeit.','bot'); add(FLOW[0][0],'bot'); chips.textContent='';}
-  function toggle(){box.classList.contains('open')?box.classList.remove('open'):open();}
-  fab.onclick=toggle; box.querySelector('.cb-h button').onclick=toggle;
+  function open(){
+  box.classList.add('open');
+  fab.setAttribute('aria-label','Assistent schließen');
+  inp.focus();
+}
+
+function close(){
+  box.classList.remove('open');
+  fab.setAttribute('aria-label','Assistent öffnen');
+}
+
+function startFlow(){
+  open();
+  flow=0;
+  answers=[];
+  add('Gern! Vier kurze Fragen, dann haben Sie eine Zusammenfassung für ein Angebot. Mit „abbrechen“ beenden Sie das jederzeit.','bot');
+  add(FLOW[0][0],'bot');
+  chips.textContent='';
+}
+
+function toggle(){
+  if(box.classList.contains('open')){
+    close();
+  }else{
+    open();
+  }
+}
+
+fab.addEventListener('click',toggle);
+box.querySelector('.cb-h button').addEventListener('click',close);
   box.querySelector('form').onsubmit=function(e){e.preventDefault(); var v=inp.value.trim(); if(!v)return; inp.value=''; ask(v);};
   document.querySelectorAll('[data-open-bot]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault(); startFlow();})});
   add('Hallo! Ich beantworte Fragen zu dieser Website. Ich bin ein automatischer Assistent, keine Person.','bot'); home();
