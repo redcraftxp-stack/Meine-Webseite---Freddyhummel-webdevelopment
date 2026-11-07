@@ -1536,4 +1536,39 @@ iframe {
     transition-duration: .01ms !important;
   }
 }
+  @media (max-width: 600px) {
+  .logo {
+    font-size: 0.85rem;
+    gap: 5px;
+  }
+
+  .logo small {
+    font-size: 0.58rem;
+  }
+
+  header .btn {
+    font-size: 11px;
+    padding: 9px 7px;
+    white-space: nowrap;
+  }
+
+  .bar {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .logo {
+    font-size: 0.78rem;
+  }
+
+  .logo small {
+    font-size: 0.53rem;
+  }
+
+  header .btn {
+    font-size: 10px;
+    padding: 8px 6px;
+  }
+}
 }
