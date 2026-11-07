@@ -78,18 +78,40 @@
     </div>
 
     <!-- Formular, damit Besucher neue Rezensionen schreiben können -->
-    <form id="review-form" style="margin-top: 40px; background: #f8fafc; padding: 24px; border-radius: 8px; border: 1px solid #e2e8f0;">
-      <h3 style="margin-bottom: 16px; font-size: 1.2rem;">Schreiben Sie eine Rezension</h3>
-      <div style="margin-bottom: 12px;">
-        <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihr Name</label>
-        <input type="text" id="review-name" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;" />
-      </div>
-      <div style="margin-bottom: 12px;">
-        <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihre Bewertung / Nachricht</label>
-        <textarea id="review-text" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
-      </div>
-      <button type="submit" class="btn" style="cursor: pointer;">Rezension absenden</button>
-    </form>
+    <section class="alt" id="rezensionen">
+  <div class="wrap reviews">
+    <div>
+      <h2 data-cms="rezensionen.h2.0">Rezensionen</h2>
+      <p class="muted" data-cms="rezensionen.p.0">Sie haben mit mir zusammengearbeitet? Hinterlassen Sie eine kurze Bewertung – ich freue mich über Ihr Feedback!</p>
+      
+      <!-- Hier werden die geladenen Rezensionen dynamisch eingefügt -->
+      <div id="reviews-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;"></div>
+
+      <form id="review-form" style="margin-top: 40px; background: #f8fafc; padding: 24px; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <h3 style="margin-bottom: 16px; font-size: 1.2rem;">Schreiben Sie eine Rezension</h3>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihr Name</label>
+          <input type="text" id="review-name" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;" />
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihre Bewertung / Nachricht</label>
+          <textarea id="review-text" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
+        </div>
+        <button type="submit" class="btn" style="cursor: pointer;">Rezension absenden</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="ablauf" style="padding-bottom:40px">
+  <div class="wrap">
+    <h2 data-cms="ablauf.h2.0" style="max-width:9em">So läuft die Zusammenarbeit</h2>
+    <ol class="steps">
+      <li><h3 data-cms="ablauf.h3.0">Kontakt aufnehmen</h3><p data-cms="ablauf.p.0">Sie schreiben mir kurz, worum es geht – per Formular, WhatsApp, Mail oder Telefon.</p><a class="btn ghost sm" data-cms="ablauf.a.0" href="#kontakt">Projekt anfragen</a></li>
+      <li><h3 data-cms="ablauf.h3.1">Beratung</h3><p data-cms="ablauf.p.1">Wir klären Ziel, Umfang und Zeitrahmen. Sie erhalten ein konkretes Angebot.</p></li>
+      <li><h3 data-cms="ablauf.h3.2">Umsetzung</h3><p data-cms="ablauf.p.2">Ich gestalte und baue die Seite und zeige Ihnen Zwischenstände.</p></li>
+      <li><h3 data-cms="ablauf.h3.3">Abschluss</h3><p data-cms="ablauf.p.3">Gemeinsamer Check, danach geht die Seite online. Danach bleibe ich nach wie vor erreichbar.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -136,22 +158,6 @@
 
   loadReviews();
 </script>
-<section class="alt" id="ablauf" style="padding-bottom:40px">
-<div class="wrap">
-<h2 data-cms="ablauf.h2.0" style="max-width:9em">So läuft die Zusammenarbeit</h2>
-<ol class="steps">
-<li><h3 data-cms="ablauf.h3.0">Kontakt aufnehmen</h3><p data-cms="ablauf.p.0">Sie schreiben mir kurz, worum es geht – per Formular, WhatsApp, Mail oder Telefon.</p><a class="btn ghost sm" data-cms="ablauf.a.0" href="#kontakt">Projekt anfragen</a></li>
-<li><h3 data-cms="ablauf.h3.1">Beratung</h3><p data-cms="ablauf.p.1">Wir klären Ziel, Umfang und Zeitrahmen. Sie erhalten ein konkretes Angebot.</p></li>
-<li><h3 data-cms="ablauf.h3.2">Umsetzung</h3><p data-cms="ablauf.p.2">Ich gestalte und baue die Seite und zeige Ihnen Zwischenstände.</p></li>
-<li><h3 data-cms="ablauf.h3.3">Abschluss</h3><p data-cms="ablauf.p.3">Gemeinsamer Check, danach geht die Seite online. Danach bleibe ich nach wie vor erreichbar.</p></li>
-</ol>
-</div>
-</section>
-<section class="alt" id="rezensionen">
-<div class="wrap reviews">
-<div>
-<h2 data-cms="rezensionen.h2.0">Rezensionen</h2>
-<p class="muted" data-cms="rezensionen.p.0">Sie haben mit mir zusammengearbeitet? Hinterlassen Sie eine kurze Bewertung – ich prüfe sie kurz und veröffentliche sie dann hier.</p>
 <form class="card rform" id="review-form">
 <div class="field"><label for="r-name">Ihr Name</label><input id="r-name" maxlength="60" placeholder="Vor- und Nachname" required=""/></div>
 <div class="field"><label for="r-rating">Bewertung</label>
