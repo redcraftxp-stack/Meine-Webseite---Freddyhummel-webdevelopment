@@ -582,11 +582,35 @@ document.addEventListener('DOMContentLoaded', function () {
   var reviewForm = document.getElementById('review-form');
   var reviewList = document.getElementById('review-list');
 
+  var dateLocales = {
+    de: 'de-DE',
+    en: 'en-GB',
+    es: 'es-ES',
+    fr: 'fr-FR'
+  };
+
+  function formatReviewDate(dateValue) {
+    if (!dateValue) return '';
+
+    var date = new Date(dateValue + 'T00:00:00');
+
+    if (isNaN(date.getTime())) return '';
+
+    return new Intl.DateTimeFormat(dateLocales[LANG] || 'de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).format(date);
+  }
+
   async function loadReviews() {
     if (!reviewList) return;
 
     try {
-      var res = await fetch('/api/reviews', { cache: 'no-store' });
+      var res = await fetch(
+        '/api/reviews?lang=' + encodeURIComponent(LANG),
+        { cache: 'no-store' }
+      );
 
       if (!res.ok) {
         throw new Error(L.loadReviewsError);
@@ -609,6 +633,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var name = document.createElement('strong');
         name.textContent = r.name || L.customer;
 
+        var date = document.createElement('small');
+        date.className = 'review-date';
+
+        var formattedDate = formatReviewDate(r.date);
+
+        if (formattedDate) {
+          date.textContent = formattedDate;
+        }
+
         var stars = document.createElement('div');
         stars.className = 'stars';
 
@@ -618,7 +651,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var text = document.createElement('p');
         text.textContent = r.text || '';
 
-        card.append(name, stars, text);
+        card.append(name);
+
+        if (formattedDate) {
+          card.append(date);
+        }
+
+        card.append(stars, text);
         reviewList.appendChild(card);
       });
 
