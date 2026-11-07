@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Desarrollo web en Donzdorf | Freddy Hummel – Web Development</title>
+  <meta name="author" content="Freddy Hummel"/>
+  <meta name="description" content="Freddy Hummel crea páginas web modernas y rápidas para empresas locales y profesionales independientes en Donzdorf y sus alrededores. Creación de páginas web, rediseños, landing pages y SEO básico."/>
+
+  <meta property="og:title" content="Desarrollo web en Donzdorf | Freddy Hummel"/>
+  <meta property="og:description" content="Páginas web modernas y rápidas para empresas locales y profesionales independientes en Donzdorf."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="es_ES"/>
+
+  <link rel="canonical" href="https://freddyhummel-webdevelopment.de/es/"/>
+  <link rel="alternate" hreflang="de" href="https://freddyhummel-webdevelopment.de/de/"/>
+  <link rel="alternate" hreflang="en" href="https://freddyhummel-webdevelopment.de/en/"/>
+  <link rel="alternate" hreflang="es" href="https://freddyhummel-webdevelopment.de/es/"/>
+  <link rel="alternate" hreflang="fr" href="https://freddyhummel-webdevelopment.de/fr/"/>
+  <link rel="alternate" hreflang="x-default" href="https://freddyhummel-webdevelopment.de/de/"/>
+
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png"/>
+  <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/api/design.css"/>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Freddy Hummel – Web Development",
+    "url": "https://freddyhummel-webdevelopment.de/es/",
+    "logo": "https://freddyhummel-webdevelopment.de/favicon-512.png"
+  }
+  </script>
+</head>
+
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/es/" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+      <img alt="Freddy Hummel Web Development" height="34" src="/logo.png" width="73" style="object-fit:contain; display:block;"/>
+      <span>Freddy Hummel <small>Web Development</small></span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#leistungen">Servicios</a></li>
+        <li><a href="#ueber">Sobre mí</a></li>
+        <li><a href="#ablauf">Proceso</a></li>
+        <li><a href="#rezensionen">Opiniones</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn sm" href="#kontakt"><span class="d">Iniciar un </span>proyecto</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Desarrollo web</p>
+        <h1>Páginas web para empresas de la región</h1>
+        <p class="lead">Soy Freddy Hummel y creo páginas web para empresas locales y profesionales independientes.</p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#kontakt">Solicitar información sin compromiso</a>
+          <a class="btn ghost" href="#leistungen">Ver mis servicios</a>
+        </div>
+      </div>
+
+      <img
+        alt="Ordenador portátil sobre un escritorio de madera clara con una taza de café y bolígrafos junto a una ventana"
+        height="800"
+        src="/hero-arbeitsplatz.jpg"
+        width="640"
+      />
+    </div>
+  </section>
+
+  <section class="alt" id="leistungen">
+    <div class="wrap">
+      <h2>Páginas web adaptadas a sus necesidades</h2>
+      <p class="muted" style="max-width:36em">
+        Creo páginas web para empresas y profesionales independientes en la región de Donzdorf.
+        El contenido, el diseño y las funciones se adaptan a sus necesidades.
+      </p>
+    </div>
+  </section>
+
+  <section id="ueber">
+    <div class="wrap about">
+      <h2>Sobre mí</h2>
+
+      <div>
+        <p class="muted">
+          Detrás de Freddy Hummel – Web Development estoy yo: Freddy Hummel, de Donzdorf.
+          Diseño y programo personalmente cada página web.
+        </p>
+
+        <div class="facts">
+          <div>
+            <h3>Contacto directo</h3>
+            <p>Hablará directamente con la persona que desarrolla su página web.</p>
+          </div>
+
+          <div>
+            <h3>De la región</h3>
+            <p>Estoy establecido en Donzdorf y disponible en los alrededores.</p>
+          </div>
+
+          <div>
+            <h3>Desarrollo eficiente</h3>
+            <p>Me centro en tiempos de carga rápidos y una estructura técnica limpia.</p>
+          </div>
+
+          <div>
+            <h3>Acuerdos claros</h3>
+            <p>Definimos el alcance, los plazos y los costes antes de comenzar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="rezensionen">
+    <div class="wrap reviews">
+      <div>
+        <h2>Opiniones de clientes</h2>
+        <p class="muted">
+          ¿Ha trabajado conmigo? Deje una breve opinión.
+          La revisaré y, después de aprobarla, la publicaré aquí.
+        </p>
+
+        <form class="card rform" id="review-form">
+          <div class="field">
+            <label for="r-name">Su nombre</label>
+            <input id="r-name" maxlength="60" placeholder="Nombre y apellidos" required/>
+          </div>
+
+          <div class="field">
+            <label for="r-rating">Valoración</label>
+            <select id="r-rating">
+              <option value="5">★★★★★ – Excelente</option>
+              <option value="4">★★★★☆ – Muy bueno</option>
+              <option value="3">★★★☆☆ – Aceptable</option>
+              <option value="2">★★☆☆☆ – Mejorable</option>
+              <option value="1">★☆☆☆☆ – Malo</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="r-text">Su opinión</label>
+            <textarea id="r-text" maxlength="500" placeholder="¿Cómo fue su experiencia trabajando conmigo?" required rows="4"></textarea>
+          </div>
+
+          <button class="btn" type="submit">Enviar opinión</button>
+        </form>
+      </div>
+
+      <div aria-live="polite" id="review-list"></div>
+    </div>
+  </section>
+
+  <section class="alt" id="ablauf" style="padding-bottom:40px">
+    <div class="wrap">
+      <h2 style="max-width:9em">Así trabajaremos juntos</h2>
+
+      <ol class="steps">
+        <li>
+          <h3>Contacto</h3>
+          <p>Me explica brevemente qué necesita, mediante el formulario, WhatsApp, correo electrónico o teléfono.</p>
+          <a class="btn ghost sm" href="#kontakt">Consultar mi proyecto</a>
+        </li>
+
+        <li>
+          <h3>Asesoramiento</h3>
+          <p>Definimos los objetivos, el alcance y los plazos. Recibirá una propuesta concreta.</p>
+        </li>
+
+        <li>
+          <h3>Desarrollo</h3>
+          <p>Diseño y desarrollo la página web y le mantengo al tanto de los avances.</p>
+        </li>
+
+        <li>
+          <h3>Finalización</h3>
+          <p>Revisamos juntos el resultado y después publicamos la página web. Seguiré disponible si necesita ayuda.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq-grid">
+      <div>
+        <h2>Preguntas frecuentes</h2>
+        <p class="muted" style="font-size:.95rem">
+          ¿No encuentra su respuesta? Escríbame y estaré encantado de ayudarle.
+        </p>
+      </div>
+
+      <div>
+        <details>
+          <summary>¿Cuánto cuesta una página web?</summary>
+          <p>El precio depende del alcance del proyecto: número de páginas, funciones y contenido disponible. Después de una breve conversación, recibirá un presupuesto antes de comenzar el trabajo.</p>
+        </details>
+
+        <details>
+          <summary>¿Cuánto tiempo tarda el desarrollo?</summary>
+          <p>Normalmente, unos pocos días. Según el alcance, puede tardar hasta una semana. Acordaremos el plazo exacto antes de empezar.</p>
+        </details>
+
+        <details>
+          <summary>Todavía no tengo textos ni imágenes. ¿Es un problema?</summary>
+          <p>No. Revisaremos juntos el contenido. Le ayudaré a organizarlo y le indicaré qué materiales necesitamos todavía.</p>
+        </details>
+
+        <details>
+          <summary>¿Pueden renovar mi página web actual?</summary>
+          <p>En la mayoría de los casos, sí. Podemos reutilizar el contenido y, siempre que sea posible, mantener las direcciones de las páginas para conservar su visibilidad en los buscadores.</p>
+        </details>
+
+        <details>
+          <summary>¿Puedo modificar el contenido más adelante?</summary>
+          <p>Si lo desea, puedo configurar la página para que pueda modificar textos e imágenes usted mismo. También puedo realizar los cambios por usted.</p>
+        </details>
+
+        <details>
+          <summary>¿Mi página aparecerá en Google?</summary>
+          <p>Preparo una buena base técnica: estructura clara, títulos adecuados, tiempos de carga rápidos e información local sobre Donzdorf y sus alrededores. Sin embargo, nadie puede garantizar posiciones concretas en los resultados de búsqueda.</p>
+        </details>
+
+        <details>
+          <summary>¿También trabaja fuera de Donzdorf?</summary>
+          <p>Sí. Trabajo en la zona de Donzdorf y el distrito de Göppingen, pero también podemos realizar todo el proyecto de forma digital.</p>
+        </details>
+
+        <details>
+          <summary>¿Qué ocurre después de publicar la página?</summary>
+          <p>Si lo desea, puedo encargarme de actualizaciones y pequeños cambios. También puede ponerse en contacto conmigo si algo no funciona correctamente.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt bot-sec">
+    <div class="wrap">
+      <h2 style="max-width:11em">Asistente de IA: planifique su página web en pocos pasos</h2>
+      <p>
+        Mi asistente de IA le guía a través de una breve conversación.
+        Solo tiene que describir cómo debería ser su página web: sector,
+        objetivos, contenido y funciones. Sus respuestas me ayudarán a preparar una propuesta adecuada.
+      </p>
+      <button class="btn" data-open-bot="" type="button">Abrir asistente de IA</button>
+    </div>
+  </section>
+
+  <section class="contact" id="kontakt">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 style="max-width:7em">Hablemos de su proyecto</h2>
+        <p class="lead">
+          Cuénteme brevemente qué necesita. Me pondré en contacto con usted lo antes posible.
+          La primera consulta es gratuita y sin compromiso.
+        </p>
+
+        <div class="cl">
+          <div>
+            <small>Teléfono</small>
+            <a href="tel:+4915562839021" data-site="phone">+49 15562839021</a>
+          </div>
+
+          <div>
+            <small>Correo electrónico</small>
+            <a href="mailto:Freddyhummel.webdevelopment@gmail.com" data-site="email">Freddyhummel.webdevelopment@gmail.com</a>
+          </div>
+
+          <div>
+            <small>Ubicación</small>
+            <span data-site="city">Donzdorf, Baden-Württemberg</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="cform" id="contact-form">
+        <input aria-hidden="true" autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/>
+
+        <div class="two">
+          <div class="field">
+            <label for="c-name">Nombre</label>
+            <input autocomplete="name" id="c-name" required/>
+          </div>
+
+          <div class="field">
+            <label for="c-mail">Correo electrónico</label>
+            <input autocomplete="email" id="c-mail" required type="email"/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="c-tel">Teléfono (opcional)</label>
+          <input autocomplete="tel" id="c-tel" type="tel"/>
+        </div>
+
+        <div class="field">
+          <label for="c-msg">Su mensaje</label>
+          <textarea id="c-msg" placeholder="¿En qué puedo ayudarle?" required rows="4"></textarea>
+        </div>
+
+        <button class="btn teal" type="submit">Enviar mensaje</button>
+        <p id="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="/es/">Freddy Hummel<i>.</i></a>
+        <p>Desarrollo web en Donzdorf: páginas web modernas y rápidas para empresas locales y profesionales independientes.</p>
+      </div>
+
+      <ul>
+        <li><a href="#leistungen">Servicios</a></li>
+        <li><a href="#ablauf">Proceso</a></li>
+        <li><a href="#rezensionen">Opiniones</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="#kontakt">Contacto</a></li>
+      </ul>
+
+      <div>
+        <small>Contacto</small>
+        <p>
+          <span data-site="phone">+49 15562839021</span><br/>
+          <span data-site="email">Freddyhummel.webdevelopment@gmail.com</span>
+        </p>
+        <div hidden id="social"></div>
+      </div>
+    </div>
+
+    <div class="legal">
+      <span>© 2026 Freddy Hummel – Web Development</span>
+      <span>
+        <a href="/es/impressum.html">Aviso legal</a>
+        <a href="/es/agb.html">Términos y condiciones</a>
+        <a href="/es/datenschutz.html">Política de privacidad</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="/cms-client.js"></script>
+<script src="/script.js"></script>
+</body>
+</html>
