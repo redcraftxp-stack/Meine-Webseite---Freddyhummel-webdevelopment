@@ -58,24 +58,80 @@ var CFG={
 /* Assistent: regelbasiert, läuft komplett im Browser (keine Datenübertragung) */
 (function(){
   var MAIL='Freddyhummel.webdevelopment@gmail.com', TEL='+49 15562839021';
-  var KB=[
-   {k:['hallo',' hi ','guten tag','moin','servus','hey'],a:'Hallo! Ich beantworte Fragen zu dieser Website: Leistungen, Ablauf, Preise, Dauer, Kontakt und mehr. Was möchten Sie wissen?'},
-   {k:['kost','preis','teuer','budget','euro','günstig'],a:'Der Preis hängt vom Umfang ab: Seitenzahl, Funktionen und wie viel Inhalt schon vorliegt. Nach einem kurzen Gespräch erhalten Sie ein Angebot, <b>bevor</b> die Arbeit beginnt. <a href="index.html#kontakt">Projekt anfragen</a>'},
-   {k:['dauer','lange','wann fertig','zeit','schnell','wochen','tage'],a:'Meist sind es wenige Tage, je nach Umfang bis zu einer Woche. Den genauen Zeitrahmen klären wir vor dem Start.'},
-   {k:['text','bild','inhalt','material','foto'],a:'Auch ohne fertige Texte und Bilder geht das: Wir gehen die Inhalte gemeinsam durch, Freddy strukturiert sie und sagt Ihnen genau, welches Material noch fehlt.'},
-   {k:['bestehend','übernehm','alte seite','umzug','relaunch','redesign'],a:'In der Regel ja. Inhalte lassen sich übernehmen, die Adressen der Unterseiten bleiben nach Möglichkeit erhalten, damit Ihre Sichtbarkeit nicht verloren geht.'},
-   {k:['selbst ändern','selbst pflegen','cms','bearbeiten','editor','später ändern'],a:'Wenn Sie möchten, wird die Seite so eingerichtet, dass Sie Texte und Bilder selbst pflegen können. Alternativ übernimmt Freddy die Änderungen für Sie.'},
-   {k:['google','seo','gefunden','suchmaschine','ranking','platz'],a:'Freddy legt die technische Grundlage: saubere Struktur, sinnvolle Titel, schnelle Ladezeiten und lokale Angaben zu Donzdorf und Umgebung. Konkrete Platzierungen kann seriös niemand garantieren.'},
-   {k:['außerhalb','ausserhalb','digital','remote','entfernung','göppingen','region','donzdorf'],a:'Vor Ort ist Freddy im Raum Donzdorf und Kreis Göppingen unterwegs. Die Zusammenarbeit funktioniert darüber hinaus auch vollständig digital.'},
-   {k:['launch','online gehen','wartung','update','support','danach','pflege'],a:'Nach dem Launch übernimmt Freddy auf Wunsch Updates und kleine Anpassungen und ist Ansprechpartner, wenn etwas nicht funktioniert.'},
-   {k:['leistung','angebot','was machen','was bieten','landingpage','website erstellen'],a:'Freddy erstellt Webseiten für lokale Unternehmen und Selbstständige: Website-Erstellung, Redesign, Landingpages, Wartung und SEO-Grundlagen. Inhalt, Layout und Funktionen werden nach Ihrem Wunsch angepasst.'},
-   {k:['ablauf','schritte','zusammenarbeit','vorgehen','prozess'],a:'In vier Schritten: 1. Kontakt aufnehmen, 2. Beratung mit konkretem Angebot, 3. Umsetzung mit Zwischenständen, 4. gemeinsamer Check und Livegang. Danach bleibt Freddy erreichbar. <a href="index.html#ablauf">Zum Ablauf</a>'},
-   {k:['wer ','über','freddy','person','allein','team'],a:'Freddy Hummel aus Donzdorf steht allein hinter dem Angebot und gestaltet und programmiert jede Website selbst. Sie sprechen immer direkt mit ihm.'},
-   {k:['kontakt','telefon','anruf','nummer','mail','erreichen','whatsapp','adresse'],a:'Telefon: <a href="tel:+4915562839021">'+TEL+'</a><br>E-Mail: <a href="mailto:'+MAIL+'">'+MAIL+'</a><br>Standort: Donzdorf, Baden-Württemberg<br><a href="index.html#kontakt">Zum Kontaktformular</a>'},
-   {k:['bewertung','rezension','referenz','erfahrung'],a:'Kundinnen und Kunden können unter <a href="index.html#rezensionen">Rezensionen</a> eine kurze Bewertung hinterlassen.'},
-   {k:['impressum','agb','geschäftsbedingung','datenschutz','dsgvo'],a:'Rechtliches finden Sie hier: <a href="impressum.html">Impressum</a>, <a href="agb.html">AGB</a>, <a href="datenschutz.html">Datenschutzerklärung</a>.'},
-   {k:['danke','super','prima'],a:'Gern geschehen! Wenn Sie möchten, können Sie auch direkt ein Projekt anfragen.'}
-  ];
+ var KB=[
+  {
+    k:['hallo','guten tag','moin','servus','hey'],
+    a:'Hallo! Schön, dass Sie hier sind. Ich beantworte gerne Ihre Fragen rund um die Website-Erstellung. Was möchten Sie wissen?'
+  },
+  {
+    k:['kost','preis','teuer','budget','günstig','kostenpunkt'],
+    a:'Die Kosten einer Website hängen vom Umfang, der Anzahl der Seiten und den gewünschten Funktionen ab. Der Preis wird immer vor Beginn der Erstellung gemeinsam besprochen und verbindlich vereinbart. Sie wissen also vorher, welche Kosten auf Sie zukommen. <a href="index.html#kontakt">Jetzt unverbindlich anfragen</a>.'
+  },
+  {
+    k:['bezahlen','zahlung','anzahlung','rechnung','bezahlung'],
+    a:'Die Zahlungsbedingungen werden vor Beginn des Projekts gemeinsam vereinbart. Alle Kosten werden transparent besprochen, bevor die Umsetzung startet.'
+  },
+  {
+    k:['dauer','lange','wann fertig','zeit','wochen','tage'],
+    a:'Je nach Umfang dauert die Erstellung normalerweise einige Tage bis etwa eine Woche. Den genauen Zeitrahmen besprechen wir vor Beginn des Projekts.'
+  },
+  {
+    k:['ablauf','schritte','zusammenarbeit','vorgehen','prozess'],
+    a:'Die Zusammenarbeit läuft in vier Schritten ab: 1. Sie nehmen Kontakt auf. 2. Wir besprechen Ihre Wünsche und vereinbaren den Preis. 3. Ich erstelle Ihre Website. 4. Gemeinsam prüfen wir das Ergebnis und veröffentlichen die Website. <a href="index.html#ablauf">Mehr zum Ablauf</a>.'
+  },
+  {
+    k:['preis enthalten','inklusive','enthalten','umfang'],
+    a:'Der Leistungsumfang wird individuell vereinbart. Dazu können beispielsweise Design, technische Umsetzung, mobile Optimierung und Kontaktmöglichkeiten gehören. Sie erfahren vorab genau, was enthalten ist.'
+  },
+  {
+    k:['selbst ändern','selbst pflegen','cms','bearbeiten','editor'],
+    a:'Ja! Auf Wunsch kann ein Content-Management-System eingerichtet werden. Damit können Sie beispielsweise Texte und Bilder Ihrer Website selbst bearbeiten.'
+  },
+  {
+    k:['text','bild','inhalt','material','foto','logo'],
+    a:'Sie benötigen nicht unbedingt fertige Texte oder Bilder. Wir besprechen gemeinsam, welche Inhalte gebraucht werden und was Sie bereits haben.'
+  },
+  {
+    k:['bestehend','übernehm','alte seite','umzug','relaunch','redesign'],
+    a:'Ja, auch bestehende Websites können überarbeitet werden. Vorhandene Inhalte und Bilder können nach Absprache übernommen werden.'
+  },
+  {
+    k:['google','seo','gefunden','suchmaschine','ranking'],
+    a:'Ich achte auf eine saubere technische Grundlage für Suchmaschinen: passende Seitentitel, eine klare Struktur und schnelle Ladezeiten. Eine bestimmte Google-Platzierung kann allerdings nicht garantiert werden.'
+  },
+  {
+    k:['leistung','angebot','was machen','was bieten','landingpage','website erstellen'],
+    a:'Ich biete Website-Erstellung, Redesign bestehender Websites, Landingpages und SEO-Grundlagen für lokale Unternehmen und Selbstständige an.'
+  },
+  {
+    k:['wartung','update','support','pflege','nach fertigstellung'],
+    a:'Auch nach der Veröffentlichung können weitere Betreuung, Updates und Anpassungen vereinbart werden.'
+  },
+  {
+    k:['außerhalb','ausserhalb','digital','remote','entfernung','göppingen','region','donzdorf'],
+    a:'Ich bin im Raum Donzdorf und Göppingen tätig. Eine Zusammenarbeit ist aber auch vollständig digital möglich.'
+  },
+  {
+    k:['wer','über freddy','freddy','person','team'],
+    a:'Freddy Hummel aus Donzdorf entwickelt die Websites persönlich. Sie haben einen direkten Ansprechpartner während des gesamten Projekts.'
+  },
+  {
+    k:['kontakt','telefon','anruf','nummer','mail','erreichen','adresse'],
+    a:'Sie erreichen Freddy per E-Mail unter <a href="mailto:freddyhummel.webdevelopment@gmail.com">freddyhummel.webdevelopment@gmail.com</a> oder telefonisch unter <a href="tel:+4915562839021">+49 155 62839021</a>. <a href="index.html#kontakt">Zum Kontaktformular</a>.'
+  },
+  {
+    k:['bewertung','rezension','referenz','erfahrung'],
+    a:'Kundinnen und Kunden können unter <a href="index.html#rezensionen">Rezensionen</a> eine Bewertung hinterlassen.'
+  },
+  {
+    k:['impressum','agb','geschäftsbedingung','datenschutz','dsgvo'],
+    a:'Hier finden Sie die rechtlichen Informationen: <a href="impressum.html">Impressum</a>, <a href="agb.html">AGB</a> und <a href="datenschutz.html">Datenschutzerklärung</a>.'
+  },
+  {
+    k:['danke','super','prima'],
+    a:'Gern geschehen! Wenn Sie weitere Fragen haben, helfe ich Ihnen gerne weiter.'
+  }
+];
   var FLOW=[
    ['Aus welcher Branche kommt Ihr Unternehmen?','Branche'],
    ['Welches Ziel soll die Website haben (z. B. Anfragen, Termine, Information)?','Ziel'],
@@ -94,17 +150,37 @@ var CFG={
 
   function add(t,who,html){var d=document.createElement('div'); d.className='msg '+who; if(html) d.innerHTML=t; else d.textContent=t; m.appendChild(d); m.scrollTop=m.scrollHeight;}
   function setChips(a){chips.textContent=''; a.forEach(function(x){var b=document.createElement('button'); b.type='button'; b.textContent=x[0]; b.onclick=x[1]; chips.appendChild(b);});}
-  function home(){setChips([
-    ['Was kostet eine Website?',function(){ask('Was kostet eine Website?')}],
-    ['Wie lange dauert es?',function(){ask('Wie lange dauert die Umsetzung?')}],
-    ['Leistungen',function(){ask('Welche Leistungen gibt es?')}],
-    ['Angebot vorbereiten',startFlow],
-    ['Kontakt',function(){ask('Kontakt')}]]);}
+  function home(){
+  setChips([
+    ['💶 Was kostet eine Website?',function(){ask('Was kostet eine Website?')}],
+    ['📋 Wie läuft die Zusammenarbeit ab?',function(){ask('Wie läuft die Zusammenarbeit ab?')}],
+    ['⏱ Wie lange dauert es?',function(){ask('Wie lange dauert die Erstellung?')}],
+    ['🛠 Welche Leistungen gibt es?',function(){ask('Welche Leistungen bietest du an?')}],
+    ['✏️ Kann ich die Website selbst bearbeiten?',function(){ask('Kann ich meine Website selbst bearbeiten?')}],
+    ['📞 Wie kann ich Kontakt aufnehmen?',function(){ask('Wie kann ich Kontakt aufnehmen?')}]
+  ]);
+}
   function reply(q){
     var t=' '+q.toLowerCase()+' ', best=null, bs=0;
     KB.forEach(function(e){var s=0; e.k.forEach(function(w){if(t.indexOf(w)>-1)s++}); if(s>bs){bs=s;best=e}});
     return best?best.a:'Dazu habe ich keine passende Antwort. Fragen Sie Freddy direkt: <a href="mailto:'+MAIL+'">'+MAIL+'</a> oder <a href="tel:+4915562839021">'+TEL+'</a>.';
   }
+  function findFixedAnswer(q){
+  var t=' '+q.toLowerCase()+' ';
+  var best=null;
+  var bs=0;
+  KB.forEach(function(e){
+    var score=0;
+    e.k.forEach(function(w){
+      if(t.indexOf(w)>-1) score++;
+    });
+    if(score>bs){
+      bs=score;
+      best=e;
+    }
+  });
+  return best ? best.a : null;
+}
   var hist=[];
   function aiReply(q){
     hist.push({role:'user',content:q});
@@ -125,7 +201,15 @@ var CFG={
       add('Danke! Das ist die Grundlage für ein Angebot. <a href="'+href+'">Zusammenfassung per E-Mail senden</a> oder <a href="index.html#kontakt">Kontaktformular nutzen</a>.','bot',true);
       flow=null; home(); return;
     }
-    if(CFG.botEndpoint){aiReply(q);}else{setTimeout(function(){add(reply(q),'bot',true)},250);}
+  var fixedAnswer=findFixedAnswer(q);
+
+if(fixedAnswer){
+  add(fixedAnswer,'bot',true);
+}else if(CFG.botEndpoint){
+  aiReply(q);
+}else{
+  setTimeout(function(){add(reply(q),'bot',true)},250);
+}
   }
   function open(){box.classList.add('open'); inp.focus();}
   function startFlow(){open(); flow=0; answers=[]; add('Gern! Vier kurze Fragen, dann haben Sie eine Zusammenfassung für ein Angebot. Mit „abbrechen“ beenden Sie das jederzeit.','bot'); add(FLOW[0][0],'bot'); chips.textContent='';}
