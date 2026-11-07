@@ -67,6 +67,75 @@
 </div>
 </div>
 </section>
+  <section id="rezensionen" style="padding: 60px 0;">
+  <div class="wrap">
+    <h2 data-cms="rezensionen.h2.0">Rezensionen</h2>
+    <p class="muted" data-cms="rezensionen.p.0">Was Kunden über meine Arbeit sagen.</p>
+    
+    <!-- Hier werden die Rezensionen automatisch geladen -->
+    <div id="reviews-container" style="margin-top: 24px; display: grid; gap: 16px;">
+      <p class="muted">Lade Rezensionen...</p>
+    </div>
+
+    <!-- Formular, damit Besucher neue Rezensionen schreiben können -->
+    <form id="review-form" style="margin-top: 40px; background: #f8fafc; padding: 24px; border-radius: 8px; border: 1px solid #e2e8f0;">
+      <h3 style="margin-bottom: 16px; font-size: 1.2rem;">Schreiben Sie eine Rezension</h3>
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihr Name</label>
+        <input type="text" id="review-name" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;" />
+      </div>
+      <div style="margin-bottom: 12px;">
+        <label style="display: block; font-size: 14px; margin-bottom: 4px; font-weight: 500;">Ihre Bewertung / Nachricht</label>
+        <textarea id="review-text" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
+      </div>
+      <button type="submit" class="btn" style="cursor: pointer;">Rezension absenden</button>
+    </form>
+  </div>
+</section>
+
+<script>
+  async function loadReviews() {
+    try {
+      const res = await fetch('/api/reviews');
+      const reviews = await res.json();
+      const container = document.getElementById('reviews-container');
+      if (!reviews || reviews.length === 0) {
+        container.innerHTML = '<p class="muted">Noch keine Rezensionen vorhanden. Schreiben Sie die erste!</p>';
+        return;
+      }
+      container.innerHTML = reviews.map(r => `
+        <div style="background: #ffffff; padding: 16px; border-radius: 6px; border: 1px solid #e2e8f0;">
+          <strong>${r.name}</strong>
+          <p style="margin: 8px 0 0 0;" class="muted">${r.text}</p>
+        </div>
+      `).join('');
+    } catch (e) {
+      document.getElementById('reviews-container').innerHTML = '<p class="muted">Rezensionen konnten nicht geladen werden.</p>';
+    }
+  }
+
+  document.getElementById('review-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('review-name').value;
+    const text = document.getElementById('review-text').value;
+
+    const res = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, text })
+    });
+
+    if (res.ok) {
+      alert('Vielen Dank für Ihre Rezension!');
+      document.getElementById('review-form').reset();
+      loadReviews();
+    } else {
+      alert('Fehler beim Absenden.');
+    }
+  });
+
+  loadReviews();
+</script>
 <section class="alt" id="ablauf" style="padding-bottom:40px">
 <div class="wrap">
 <h2 data-cms="ablauf.h2.0" style="max-width:9em">So läuft die Zusammenarbeit</h2>
