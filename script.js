@@ -168,3 +168,66 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const reviewForm = document.getElementById('review-form');
+  const reviewList = document.getElementById('review-list');
+
+  // 1. Rezensionen von der API laden und im originalen Design anzeigen
+  async function loadReviews() {
+    if (!reviewList) return;
+
+    try {
+      const res = await fetch('/api/reviews');
+      const reviews = await res.json();
+
+      if (!reviews || reviews.length === 0) {
+        reviewList.innerHTML = '<p class="muted" style="margin-top: 20px;">Noch keine Rezensionen vorhanden.</p>';
+        return;
+      }
+
+      reviewList.innerHTML = reviews.map(r => `
+        <div class="card" style="margin-top: 16px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong>${r.name}</strong>
+            <span style="color: #f59e0b;">${'★'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}</span>
+          </div>
+          <p class="muted" style="margin: 0;">${r.text}</p>
+        </div>
+      `).join('');
+    } catch (err) {
+      reviewList.innerHTML = '<p class="muted" style="margin-top: 20px;">Fehler beim Laden der Rezensionen.</p>';
+    }
+  }
+
+  // 2. Absenden des ursprünglichen Formulars abfangen
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('r-name').value;
+      const rating = parseInt(document.getElementById('r-rating').value, 10);
+      const text = document.getElementById('r-text').value;
+
+      try {
+        const res = await fetch('/api/reviews', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, rating, text })
+        });
+
+        if (res.ok) {
+          alert('Vielen Dank für Ihre Bewertung!');
+          reviewForm.reset();
+          loadReviews();
+        } else {
+          alert('Fehler beim Absenden der Bewertung.');
+        }
+      } catch (err) {
+        alert('Netzwerkfehler beim Absenden.');
+      }
+    });
+  }
+
+  // Beim Laden der Seite Rezensionen direkt abrufen
+  loadReviews();
+});
