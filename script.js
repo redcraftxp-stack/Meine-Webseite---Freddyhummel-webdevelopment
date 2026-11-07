@@ -35,34 +35,6 @@ var CFG={
   });
 })();
 
-/* Rezensionen (nur lokal im Browser; für öffentliche Bewertungen ein Backend anbinden) */
-(function(){
-  var list=document.getElementById('review-list'); if(!list) return;
-  var KEY='fh-reviews';
-  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return[]}}
-  function render(){
-    var a=load(); list.textContent='';
-    if(!a.length){
-      var c=document.createElement('div'); c.className='card';
-      c.innerHTML='<h3>Noch keine Bewertungen</h3><p>Hier erscheinen ausschließlich echte Rückmeldungen von Kundinnen und Kunden – sobald die ersten hinterlassen wurden.</p>';
-      list.appendChild(c); return;
-    }
-    a.slice().reverse().forEach(function(r){
-      var c=document.createElement('div'); c.className='card';
-      var s=document.createElement('div'); s.className='stars'; s.textContent='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
-      var n=document.createElement('h3'); n.textContent=r.name;
-      var t=document.createElement('p'); t.textContent=r.text;
-      c.append(s,n,t); list.appendChild(c);
-    });
-  }
-  document.getElementById('review-form').addEventListener('submit',function(e){
-    e.preventDefault(); var a=load();
-    a.push({name:document.getElementById('r-name').value.trim(),rating:+document.getElementById('r-rating').value,text:document.getElementById('r-text').value.trim()});
-    try{localStorage.setItem(KEY,JSON.stringify(a))}catch(x){}
-    this.reset(); render();
-  });
-  render();
-})();
 
 /* Assistent: regelbasiert, läuft komplett im Browser (keine Datenübertragung) */
 (function(){
@@ -168,45 +140,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', function () {
   const reviewForm = document.getElementById('review-form');
   const reviewList = document.getElementById('review-list');
 
-  // 1. Rezensionen von der API laden und im originalen Design anzeigen
   async function loadReviews() {
-    if (!reviewList) return;
-
     try {
       const res = await fetch('/api/reviews');
-      const reviews = await res.json();
+      if (!res.ok) throw new Error('Laden fehlgeschlagen');
 
-      if (!reviews || reviews.length === 0) {
-        reviewList.innerHTML = '<p class="muted" style="margin-top: 20px;">Noch keine Rezensionen vorhanden.</p>';
+      const data = await res.json();
+      const reviews = Array.isArray(data) ? data : (data.reviews || []);
+
+      reviewList.replaceChildren();
+
+      if (reviews.length === 0) {
+        reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
         return;
       }
 
-      reviewList.innerHTML = reviews.map(r => `
-        <div class="card" style="margin-top: 16px; padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <strong>${r.name}</strong>
-            <span style="color: #f59e0b;">${'★'.repeat(r.rating || 5)}${'☆'.repeat(5 - (r.rating || 5))}</span>
-          </div>
-          <p class="muted" style="margin: 0;">${r.text}</p>
-        </div>
-      `).join('');
+      reviews.forEach(function (r) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const name = document.createElement('strong');
+        name.textContent = r.name;
+
+        const stars = document.createElement('div');
+        stars.className = 'stars';
+        stars.textContent =
+          '★'.repeat(r.rating || 5) +
+          '☆'.repeat(5 - (r.rating || 5));
+
+        const text = document.createElement('p');
+        text.textContent = r.text;
+
+        card.append(name, stars, text);
+        reviewList.appendChild(card);
+      });
     } catch (err) {
-      reviewList.innerHTML = '<p class="muted" style="margin-top: 20px;">Fehler beim Laden der Rezensionen.</p>';
+      reviewList.textContent = 'Fehler beim Laden der Rezensionen.';
+      console.error(err);
     }
   }
 
-  // 2. Absenden des ursprünglichen Formulars abfangen
   if (reviewForm) {
-    reviewForm.addEventListener('submit', async (e) => {
+    reviewForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const name = document.getElementById('r-name').value;
-      const rating = parseInt(document.getElementById('r-rating').value, 10);
-      const text = document.getElementById('r-text').value;
+      const button = reviewForm.querySelector('button[type="submit"]');
+      const name = document.getElementById('r-name').value.trim();
+      const rating = Number(document.getElementById('r-rating').value);
+      const text = document.getElementById('r-text').value.trim();
+
+      button.disabled = true;
 
       try {
         const res = await fetch('/api/reviews', {
@@ -215,19 +203,25 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify({ name, rating, text })
         });
 
-        if (res.ok) {
-          alert('Vielen Dank für Ihre Bewertung!');
-          reviewForm.reset();
-          loadReviews();
-        } else {
-          alert('Fehler beim Absenden der Bewertung.');
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.error || 'Absenden fehlgeschlagen');
         }
+
+        reviewForm.reset();
+        alert('Vielen Dank! Deine Bewertung wurde eingereicht und wird geprüft.');
+        await loadReviews();
+
       } catch (err) {
-        alert('Netzwerkfehler beim Absenden.');
+        alert(err.message || 'Fehler beim Absenden.');
+        console.error(err);
+      } finally {
+        button.disabled = false;
       }
     });
   }
 
-  // Beim Laden der Seite Rezensionen direkt abrufen
   loadReviews();
 });
+
