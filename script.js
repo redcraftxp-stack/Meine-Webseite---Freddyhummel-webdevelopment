@@ -144,6 +144,22 @@ var CFG={
   fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V5M9.5 5h5"/><circle cx="9" cy="13.5" r="1.2" fill="currentColor"/><circle cx="15" cy="13.5" r="1.2" fill="currentColor"/></svg>';
   var box=document.createElement('div'); box.className='cb'; box.setAttribute('role','dialog'); box.setAttribute('aria-label','Assistent');
   box.innerHTML='<div class="cb-h"><div><strong>Website-Assistent</strong><small>Automatische Antworten, kein Mensch</small></div><button aria-label="Schließen">×</button></div><div class="cb-m" aria-live="polite"></div><div class="chips"></div><form class="cb-f"><input placeholder="Ihre Frage …" aria-label="Ihre Frage" maxlength="200"><button class="btn sm" type="submit">Senden</button></form>';
+  var chipsToggle=document.createElement('button');
+chipsToggle.type='button';
+chipsToggle.className='cb-chips-toggle';
+chipsToggle.textContent='Häufige Fragen anzeigen ▼';
+
+var chipsElement=box.querySelector('.chips');
+chipsElement.hidden=true;
+chipsElement.parentNode.insertBefore(chipsToggle,chipsElement);
+
+chipsToggle.addEventListener('click',function(){
+  var open=!chipsElement.hidden;
+  chipsElement.hidden=open;
+  chipsToggle.textContent=open
+    ? 'Häufige Fragen anzeigen ▼'
+    : 'Häufige Fragen ausblenden ▲';
+});
   document.body.append(box,fab);
   if(CFG.botEndpoint) box.querySelector('small').textContent='KI-Assistent – Antworten können Fehler enthalten';
   var m=box.querySelector('.cb-m'), chips=box.querySelector('.chips'), inp=box.querySelector('input');
