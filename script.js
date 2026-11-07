@@ -122,24 +122,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!reviewForm) return;
 
-  async function loadReviews() {
-    if (!reviewList) return;
 
-    try {
-      const res = await fetch('/api/reviews');
-      if (!res.ok) throw new Error('Laden fehlgeschlagen');
+async function loadReviews() {
+  if (!reviewList) return;
 
-      const data = await res.json();
-      const reviews = Array.isArray(data) ? data : (data.reviews || []);
+  try {
+    const res = await fetch('/api/reviews');
+    if (!res.ok) throw new Error('Laden fehlgeschlagen');
 
+    const data = await res.json();
+    const reviews = Array.isArray(data) ? data : (data.reviews || []);
+
+    reviewList.replaceChildren();
+
+    if (reviews.length === 0) {
+      reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
+      return;
+    }
+
+    let expanded = false;
+
+    function renderReviews() {
       reviewList.replaceChildren();
 
-      if (reviews.length === 0) {
-        reviewList.textContent = 'Noch keine veröffentlichten Rezensionen.';
-        return;
-      }
+      const visibleReviews = expanded ? reviews : reviews.slice(0, 4);
 
-      reviews.forEach(function (r) {
+      visibleReviews.forEach(function (r) {
         const card = document.createElement('div');
         card.className = 'card';
 
@@ -158,55 +166,28 @@ document.addEventListener('DOMContentLoaded', function () {
         card.append(name, stars, text);
         reviewList.appendChild(card);
       });
-    } catch (err) {
-      console.error('Rezensionen laden:', err);
-    }
-  }
 
-  reviewForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+      if (reviews.length > 4) {
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'btn';
+        toggle.textContent = expanded
+          ? 'Weniger anzeigen'
+          : `Weitere ${reviews.length - 4} Bewertungen anzeigen`;
 
-    const name = reviewForm.querySelector('#r-name').value.trim();
-    const rating = Number(reviewForm.querySelector('#r-rating').value);
-    const text = reviewForm.querySelector('#r-text').value.trim();
+        toggle.addEventListener('click', function () {
+          expanded = !expanded;
+          renderReviews();
+        });
 
-    console.log('REZENSION VOR DEM SENDEN:', {
-      name: name,
-      rating: rating,
-      text: text
-    });
-
-    const button = reviewForm.querySelector('button[type="submit"]');
-    button.disabled = true;
-
-    try {
-      const res = await fetch('/api/reviews', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, rating, text })
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.error || 'Fehler beim Absenden');
+        reviewList.appendChild(toggle);
       }
-
-      reviewForm.reset();
-      alert('Vielen Dank! Deine Bewertung wurde eingereicht und wird geprüft.');
-      await loadReviews();
-
-    } catch (err) {
-      console.error('REZENSIONSFEHLER:', err);
-      alert(err.message || 'Fehler beim Absenden.');
-    } finally {
-      button.disabled = false;
     }
-  }, true);
 
-  loadReviews();
-});
+    renderReviews();
 
-
+  } catch (err) {
+    console.error('Rezensionen laden:', err);
+  }
+}
 
