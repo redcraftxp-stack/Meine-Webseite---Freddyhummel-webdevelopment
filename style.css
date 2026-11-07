@@ -373,3 +373,104 @@ header .btn {
     font-size: 11px;
   }
 }
+/* ===== HEADER UND NAVIGATION OPTIMIEREN ===== */
+
+header .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Logo */
+header .logo {
+  flex: 0 0 auto;
+  gap: 6px !important;
+}
+
+header .logo img {
+  width: 60px;
+  height: 30px;
+}
+
+header .logo span {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+header .logo small {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Navigation */
+header nav {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+header nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.8vw, 12px);
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+header nav li {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+header nav a {
+  font-size: clamp(10px, 0.8vw, 13px);
+  white-space: nowrap;
+}
+
+/* Sprachauswahl */
+header .language-selector {
+  flex: 0 0 auto;
+}
+
+header .language-selector summary {
+  font-size: 12px;
+  padding: 8px;
+}
+
+/* Kontaktbutton */
+header .btn {
+  flex: 0 0 auto;
+  font-size: 12px;
+  padding: 9px 11px;
+  white-space: nowrap;
+}
+
+/* Kleinere Bildschirme */
+@media (max-width: 1050px) {
+  header .bar {
+    gap: 6px;
+  }
+
+  header .logo img {
+    width: 48px;
+  }
+
+  header .logo span {
+    font-size: 12px;
+  }
+
+  header nav ul {
+    gap: 5px;
+  }
+
+  header nav a {
+    font-size: 10px;
+  }
+
+  header .language-selector summary {
+    font-size: 11px;
+  }
+}
