@@ -327,3 +327,49 @@ select,input,textarea{max-width:100%}
     padding: 11px 10px;
   }
 }
+/* Navigation bei längeren Sprachen anpassen */
+
+header .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+header nav {
+  flex: 1;
+  min-width: 0;
+}
+
+header nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.2vw, 18px);
+  flex-wrap: nowrap;
+}
+
+header nav a {
+  font-size: clamp(11px, 0.9vw, 14px);
+  white-space: nowrap;
+}
+
+header .logo {
+  flex-shrink: 0;
+}
+
+header .btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Bei kleineren Bildschirmen */
+@media (max-width: 900px) {
+  header nav ul {
+    gap: 7px;
+  }
+
+  header nav a {
+    font-size: 11px;
+  }
+}
