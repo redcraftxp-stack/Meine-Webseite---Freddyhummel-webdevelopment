@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Website-Designer – so könnte Ihre Website aussehen | Freddy Hummel</title>
+
+<meta name="description" content="Wählen Sie Branche, Design und Funktionen und sehen Sie sofort eine Vorschau Ihrer Website. Kostenlos und unverbindlich ausprobieren – von Freddy Hummel, Webentwicklung in Donzdorf.">
+
+<meta property="og:title" content="Website-Designer – so könnte Ihre Website aussehen">
+<meta property="og:description" content="Branche, Design und Funktionen wählen und live eine Vorschau Ihrer Website sehen.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+
+<link rel="canonical" href="https://freddyhummel-webdevelopment.de/designer">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/api/design.css">
+<link rel="stylesheet" href="/designer/designer.css">
+</head>
+
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/">
+      <img src="/logo.png" alt="FH Logo" width="73" height="34">
+      <span>Freddy Hummel <small>Web Development</small></span>
+    </a>
+
+    <a class="btn sm" href="/#kontakt">
+      <span class="d">Projekt anfragen</span>
+      <span class="m">Anfragen</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <section class="dz-hero">
+    <div class="wrap">
+      <p class="eyebrow">Website-Designer</p>
+
+      <h1>So könnte Ihre Website aussehen</h1>
+
+      <p class="dz-muted dz-lead">
+        Wählen Sie Branche, Design und Funktionen und sehen Sie sofort eine Vorschau.
+        Kostenlos, ohne Anmeldung und ohne Verpflichtung.
+        Was Ihnen gefällt, setze ich anschließend für Sie um.
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap dz-wide">
+
+    <div class="dz-mtabs" role="group" aria-label="Ansicht">
+      <button type="button" data-mtab="set" aria-pressed="true">Einstellungen</button>
+      <button type="button" data-mtab="pv" aria-pressed="false">Vorschau</button>
+    </div>
+
+    <div class="dz-app" id="dz-app">
+
+      <aside class="dz-panel" id="dz-panel" aria-label="Einstellungen">
+        <noscript>
+          Für den Website-Designer wird JavaScript benötigt.
+        </noscript>
+      </aside>
+
+      <section class="dz-preview" aria-label="Vorschau">
+
+        <div class="dz-tools">
+
+          <div class="dz-dev" role="group" aria-label="Gerät">
+            <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+            <button type="button" data-device="tablet" aria-pressed="false">Tablet</button>
+            <button type="button" data-device="mobile" aria-pressed="false">Handy</button>
+          </div>
+
+          <button type="button" id="dz-open" class="btn ghost sm">
+            In neuem Tab öffnen
+          </button>
+
+        </div>
+
+        <div class="dz-frame" id="dz-frame" data-device="desktop">
+          <iframe
+            id="pv"
+            title="Vorschau Ihrer Website"
+            sandbox="allow-same-origin">
+          </iframe>
+        </div>
+
+        <p class="dz-muted small">
+          Die Vorschau ist eine grobe Skizze mit Beispieltexten und Platzhaltern,
+          keine fertige Website und kein verbindliches Angebot.
+        </p>
+
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<div id="dz-toast" class="dz-toast" hidden role="status"></div>
+
+<footer>
+  <div class="wrap">
+    <div class="legal" style="margin:0;border:0;padding:0">
+
+      <span>© 2026 Freddy Hummel – Web Development</span>
+
+      <span>
+        <a href="/">Startseite</a>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/agb.html">AGB</a>
+        <a href="/datenschutz.html">Datenschutzerklärung</a>
+      </span>
+
+    </div>
+  </div>
+</footer>
+
+<script src="/designer/designer.js" defer></script>
+<script src="/cms-client.js" defer></script>
+
+</body>
+</html>
