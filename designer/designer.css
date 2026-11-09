@@ -30,3 +30,9 @@
 @media(max-width:420px){.opt-grid,.des-grid{grid-template-columns:1fr}}
 
 .dz-wide{max-width:1400px}
+/* Kontakt-Button in der mobilen Vorschau kompakter */
+@media (max-width: 720px) {
+  .dz-frame iframe {
+    --mobile-button-padding: 0.45em;
+  }
+}
