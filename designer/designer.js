@@ -91,8 +91,8 @@ function buildPreview(S){
   var name=S.name||I.name,tag=S.tag||I.tag,city=S.city||'Ihre Stadt',phone=S.phone||'0000 000000',mail=S.email||'info@ihre-domain.de';
   var hero=S.hero||D.hero,cta=I.cta,init=esc((name.trim()[0]||'W').toUpperCase());
   var cls=['dz'];if(D.up)cls.push('up');cls.push('c-'+D.card);cls.push('b-'+D.btn);
-  var logo=S.logo?'<img src="'+S.logo+'" alt="">':'<span class="mk">'+init+'</span>';
-  var nav='<a href="#s">Leistungen</a><a href="#a">Über uns</a>'+(has('gallery')?'<a href="#g">Galerie</a>':'')+(has('shop')?'<a href="#sh">Shop</a>':'')+(has('blog')?'<a href="#b">News</a>':'')+'<a href="#k">Kontakt</a>';
+var logo=S.logo?'<img src="'+S.logo+'" alt="">':'<span class="mk">🖼️</span>';
+ var nav='<a href="#s">Leistungen</a><a href="#a">Über uns</a>'+(has('gallery')?'<a href="#g">Galerie</a>':'')+(has('shop')?'<a href="#sh">Shop</a>':'')+(has('blog')?'<a href="#b">News</a>':'')+'<a href="#k">Kontakt</a>';
   var h='<header class="h"><div class="w hb"><a class="brand" href="#top">'+logo+'<b>'+esc(name)+'</b></a><nav>'+nav+'</nav><div class="hr">'+(has('lang')?'<span class="pillx">DE ▾</span>':'')+(has('shop')?'<span class="pillx">🛒 0</span>':'')+'<a class="btn" href="#k">'+esc(cta)+'</a></div></div></header>';
   var img='<div class="himg"'+(S.heroImg?' style="background-image:url('+S.heroImg+')"':'')+'>'+(S.heroImg?'':I.e)+'</div>';
   var txt='<h1>'+esc(I.hero)+'</h1><p>'+esc(I.sub)+'</p><a class="btn" href="#k">'+esc(cta)+'</a> <a class="btn sec" href="#s" style="margin-left:6px">Mehr erfahren</a>';
