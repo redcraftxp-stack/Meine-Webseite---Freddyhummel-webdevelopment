@@ -1572,3 +1572,26 @@ iframe {
   }
 }
 }
+
+/* KI-Chatbot über dem WhatsApp-Button positionieren */
+
+/* Chatbot-Button */
+.cb-fab {
+    bottom: 90px !important;
+}
+
+/* Geöffnetes Chatfenster */
+.cb {
+    bottom: 164px !important;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+    .cb-fab {
+        bottom: 84px !important;
+    }
+
+    .cb {
+        bottom: 150px !important;
+    }
+}
