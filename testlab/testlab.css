@@ -1,0 +1,21 @@
+:root{--bg:#f4f6f9;--card:#fff;--tx:#1f2937;--mu:#6b7280;--ac:#2563eb;--bd:#e5e7eb;--er:#dc2626}
+*{box-sizing:border-box}body{margin:0;display:flex;min-height:100vh;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+aside{width:210px;background:#1f2937;color:#fff;padding:20px 14px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+aside h1{font-size:18px;margin:0 0 12px}nav{display:flex;flex-direction:column;gap:4px}
+nav button{background:none;border:0;color:#cbd5e1;text-align:left;padding:9px 12px;border-radius:8px;font:inherit;cursor:pointer}
+nav button.on,nav button:hover{background:#334155;color:#fff}.back{color:#94a3b8;margin-top:auto;text-decoration:none;font-size:13px}
+main{flex:1;padding:24px;min-width:0}h2{margin:0 0 16px}h3{margin:20px 0 8px;font-size:15px;color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.card.off{opacity:.6}.stat b{display:block;font-size:28px}.stat span{color:var(--mu)}
+.ic{font-size:26px}.tag{font-size:12px;background:#eef2ff;color:var(--ac);padding:2px 8px;border-radius:99px;align-self:flex-start}
+.card img{width:100%;border-radius:8px;max-height:120px;object-fit:cover}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button.b,select,input{font:inherit;padding:7px 12px;border:1px solid var(--bd);border-radius:8px;background:#fff;cursor:pointer}
+button.p{background:var(--ac);color:#fff;border-color:var(--ac)}button.b.on{border-color:var(--ac);color:var(--ac)}button.d{color:var(--er)}
+input{cursor:text;min-width:200px}small,.mu{color:var(--mu)}details{font-size:13px;color:var(--mu)}
+.fw{background:#e5e7eb;border-radius:12px;padding:10px;display:flex;justify-content:center;margin-top:12px}
+iframe{border:0;background:#fff;height:70vh;border-radius:8px;max-width:100%;transition:width .2s}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden}
+td,th{padding:9px 12px;border-bottom:1px solid var(--bd);text-align:left;font-size:14px}.err{color:var(--er)}
+.log{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;font-size:13px;max-height:220px;overflow:auto}
+@media(max-width:700px){body{flex-direction:column}aside{width:auto;flex-direction:row;align-items:center;flex-wrap:wrap;padding:10px}aside h1{margin:0}.back{margin:0 0 0 auto}nav{flex-direction:row;flex-wrap:wrap;width:100%}main{padding:14px}}
