@@ -28,7 +28,8 @@ if (fs.existsSync(featuresDir)) {
 
       features.push({
         ...feature,
-        id: feature.id || folder.name
+        id: feature.id || folder.name,
+        added: feature.added || Date.now()
       });
     } catch (error) {
       console.error(`Fehler in ${featureFile}:`, error.message);
@@ -37,11 +38,14 @@ if (fs.existsSync(featuresDir)) {
   }
 }
 
-fs.mkdirSync(path.dirname(registryFile), { recursive: true });
+const registry = {
+  generated: Date.now(),
+  features
+};
 
 fs.writeFileSync(
   registryFile,
-  JSON.stringify(features, null, 2) + "\n",
+  JSON.stringify(registry, null, 2) + "\n",
   "utf8"
 );
 
