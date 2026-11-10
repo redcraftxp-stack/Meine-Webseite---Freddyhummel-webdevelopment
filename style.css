@@ -1577,21 +1577,21 @@ iframe {
 
 /* Chatbot-Button */
 .cb-fab {
-    bottom: 90px !important;
+    bottom: 70px !important;
 }
 
 /* Geöffnetes Chatfenster */
 .cb {
-    bottom: 164px !important;
+    bottom: 144px !important;
 }
 
 /* Smartphone */
 @media (max-width: 600px) {
     .cb-fab {
-        bottom: 84px !important;
+        bottom: 64px !important;
     }
 
     .cb {
-        bottom: 150px !important;
+        bottom: 130px !important;
     }
 }
