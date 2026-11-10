@@ -13,6 +13,19 @@
       "status": "",
       "preview": "",
       "added": 1794262644246
+    },
+    {
+      "id": "online-shop",
+      "name": "Online-Shop",
+      "description": "Shop-Demo zum Testen von Produkten, Warenkorb und Bestellungen.",
+      "category": "E-Commerce",
+      "icon": "🛒",
+      "version": "2.0.0",
+      "entry": "index.html",
+      "enabled": true,
+      "status": "",
+      "preview": "",
+      "added": 1794262648471
     }
   ]
 }
