@@ -1,0 +1,1 @@
+{ "id": "online-shop", "name": "Online-Shop", "description": "Shop mit echter Zahlung (Stripe) und Vorkasse, Config-gesteuert, DSGVO/Button-Lösung.", "category": "E-Commerce", "icon": "🛒", "version": "2.0.0", "entry": "index.html", "enabled": true }

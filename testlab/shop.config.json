@@ -1,0 +1,19 @@
+{
+  "_hinweis": "Zentrale Konfiguration. Wird vom Shop (Anzeige) UND vom Worker (verbindliche Preise/Regeln) gelesen. Keine Geheimnisse hier eintragen (Stripe-Schlüssel gehören in Cloudflare-Secrets).",
+  "mode": "test",
+  "provider": "demo",
+  "_provider": "demo = Simulation ohne Zahlungsdienst | stripe = echte Zahlung über Stripe (Worker + Secrets nötig)",
+  "shopUrl": "/testlab/features/online-shop/index.html",
+  "showAdmin": true,
+  "company": { "name": "Freddy Hummel Webdevelopment", "orderEmail": "freddyhummel.de@gmail.com" },
+  "bank": {
+    "_hinweis": "Konto, auf das Vorkasse-Überweisungen gehen. Beispiel-IBAN ersetzen! Im Modus live wird die Beispiel-IBAN abgelehnt.",
+    "holder": "Freddy Hummel", "iban": "DE89 3704 0044 0532 0130 00", "bic": "COBADEFFXXX", "bankName": "Beispielbank", "dueDays": 7
+  },
+  "payments": { "online": true, "vorkasse": true },
+  "currency": "EUR",
+  "vat": { "rate": 19, "smallBusiness": false },
+  "shipping": { "cents": 490, "freeFromCents": 5000, "deliveryTime": "1–3 Werktage", "countries": ["DE"] },
+  "coupons": { "TEST10": { "percent": 10 }, "WELCOME5": { "cents": 500 } },
+  "legal": { "impressum": "/impressum", "agb": "/agb", "datenschutz": "/datenschutz", "widerruf": "/widerruf" }
+}
