@@ -1,8 +1,9 @@
 
 /* ===== Einstellungen ===== */
 var CFG = {
-  web3formsKey: '31495acc-b3e3-4b9d-b169-2f034629c560',
-  formEndpoint: 'https://formsubmit.co/ajax/freddyhummel.de@gmail.com',
+  web3formsKey: '01978fbe-2d79-439f-88c1-262824c7ce66',
+  formEndpoint: 'https://api.web3forms.com/submit',
+  notificationEmail: 'freddyhummel.webdevelopment@gmail.com',
   botEndpoint: '/api/chat'
 };
 
@@ -300,16 +301,49 @@ var L = TXT[LANG] || TXT.de;
         message: document.getElementById('c-msg').value.trim()
       };
 
-      var res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      // E-Mail über Web3Forms versenden.
+      var web3Payload = new FormData();
+      web3Payload.append('access_key', CFG.web3formsKey);
+      web3Payload.append('subject', 'Neue Kontaktanfrage – Freddy Hummel Web Development');
+      web3Payload.append('from_name', 'Freddy Hummel – Web Development');
+      web3Payload.append('name', payload.name);
+      web3Payload.append('email', payload.email);
+      web3Payload.append('phone', payload.phone);
+      web3Payload.append('message', payload.message);
 
-      var data = await res.json();
+      // Gleichzeitig weiterhin im bestehenden CMS speichern.
+      var results = await Promise.allSettled([
+        fetch(CFG.formEndpoint, {
+          method: 'POST',
+          body: web3Payload
+        }).then(async function (res) {
+          var data = await res.json();
+          if (!res.ok || !data.success) {
+            throw new Error(data.message || L.sendError);
+          }
+          return data;
+        }),
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then(async function (res) {
+          var data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || L.sendError);
+          }
+          return data;
+        })
+      ]);
 
-      if (!res.ok) {
-        throw new Error(data.error || L.sendError);
+      // Die E-Mail muss erfolgreich versendet worden sein.
+      if (results[0].status === 'rejected') {
+        throw results[0].reason;
+      }
+
+      // Ein Fehler beim CMS-Speichern darf den E-Mail-Versand nicht rückgängig machen.
+      if (results[1].status === 'rejected') {
+        console.warn('Kontaktanfrage konnte nicht zusätzlich im CMS gespeichert werden:', results[1].reason);
       }
 
       msg.textContent = L.contactSuccess;
