@@ -1,7 +1,7 @@
 
 /* ===== Einstellungen ===== */
 var CFG = {
-  web3formsKey: '74e00a9b-8bcb-474b-9cd1-c1992a7b675d',
+  web3formsKey: 'b633b8c4-1f81-4afb-bb85-f4327cd5f18f',
   formEndpoint: 'https://api.web3forms.com/submit',
   notificationEmail: 'freddyhummel.webdevelopment@gmail.com',
   botEndpoint: '/api/chat'
